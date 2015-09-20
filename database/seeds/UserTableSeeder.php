@@ -11,12 +11,14 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
+        $arr = array ('super_admin'=>0,'admin'=>0,'manager'=>0);
         DB::table('users')->insert([
             'realName' => '少年中国评论超级管理员',
-            'nickName' => '邵钟萍',
-            'email' => 'star2208@126.com',
-            'password' => md5('yca123456'),
-            'headImage' => ''
+            'nickName' => '邵中平',
+            'email' => '3063440744@qq.com',
+            'password' => md5('yca1988szp51'),
+            'headImage' => '/upload/icon.png',
+            'level' => json_encode(arr)
         ]);
     }
 }
