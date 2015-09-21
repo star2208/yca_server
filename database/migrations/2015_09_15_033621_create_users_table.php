@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('headImage');
             $table->json('level');
             $table->softDeletes()->index();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

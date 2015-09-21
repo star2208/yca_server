@@ -62,4 +62,23 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+    public function getLogin(){
+        return view("auth.login");
+    }
+
+    public function postLogin(UserLoginRequest $req){
+
+        //这里对传递过来得字段进行了处理 这个函数为我自己定义的函数 仅仅是为了演示用
+        $identity = $this->generateLoginIdentity($req->input());
+        $identity['password'] = $req->input('password');
+        //验证用户账号密码
+        if($this->auth->attempt($indentity)){
+            //登录成功 记录用户登录时间和登录ip
+            $user = User::where('id','=',$this->auth->user()->id)->first();
+            // 触发一个事件
+            event(new \App\Events\UserLogin($user,$req->ip()));
+            //重定向到想要访问的页面
+            return redirect()->intended('/');
+        }
+    }
 }
