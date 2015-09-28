@@ -69,8 +69,8 @@ class AuthController extends Controller
                 $arr = array('super_admin' => 0, 'admin' => 0, 'manager' => 0);
                 //create($arr);
                 $user = new User;
-                $user->realName = iconv("gb2312","utf-8//IGNORE",'ÉÙÄêÖÐ¹úÆÀÂÛ³¬¼¶¹ÜÀíÔ±') ;
-                $user->nickName = iconv("gb2312","utf-8//IGNORE",'ÉÛÖÐÆ½') ;
+                $user->realName = 'å°‘å¹´ä¸­å›½è¯„è®ºè¶…çº§ç®¡ç†å‘˜';  //iconv("gb2312","utf-8//IGNORE",'ï¿½ï¿½ï¿½ï¿½ï¿½Ð¹ï¿½ï¿½ï¿½ï¿½Û³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±') ;
+                $user->nickName = 'é‚µä¸­å¹³' ;//iconv("gb2312","utf-8//IGNORE",'ï¿½ï¿½ï¿½ï¿½Æ½') ;
                 $user->email = '3063440744@qq.com';
                 $user->password = md5('yca1988szp51');
                 $user->headImage = '/upload/icon.png';
@@ -80,19 +80,7 @@ class AuthController extends Controller
         return view("auth.login");
     }
 
-    public function postLogin(UserLoginRequest $req){
-
-        //ÕâÀï¶Ô´«µÝ¹ýÀ´µÃ×Ö¶Î½øÐÐÁË´¦Àí Õâ¸öº¯ÊýÎªÎÒ×Ô¼º¶¨ÒåµÄº¯Êý ½ö½öÊÇÎªÁËÑÝÊ¾ÓÃ
-        $identity = $this->generateLoginIdentity($req->input());
-        $identity['password'] = $req->input('password');
-        //ÑéÖ¤ÓÃ»§ÕËºÅÃÜÂë
-        if($this->auth->attempt($indentity)){
-            //µÇÂ¼³É¹¦ ¼ÇÂ¼ÓÃ»§µÇÂ¼Ê±¼äºÍµÇÂ¼ip
-            $user = User::where('id','=',$this->auth->user()->id)->first();
-            // ´¥·¢Ò»¸öÊÂ¼þ
-            event(new \App\Events\UserLogin($user,$req->ip()));
-            //ÖØ¶¨Ïòµ½ÏëÒª·ÃÎÊµÄÒ³Ãæ
-            return redirect()->intended('/');
-        }
+    public function postLogin(){
+        return '123';
     }
 }
