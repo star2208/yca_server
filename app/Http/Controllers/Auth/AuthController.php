@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -80,7 +81,12 @@ class AuthController extends Controller
         return view("auth.login");
     }
 
-    public function postLogin(){
+    public function postLogin(Request $request){
+
+        $this->validate($request, [
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|confirmed|min:6',
+        ]);
         return '123';
     }
 }

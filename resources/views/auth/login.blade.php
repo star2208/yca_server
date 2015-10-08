@@ -20,8 +20,18 @@
             <a href="../../index2.html"><b>Admin</b>YCA</a>
         </div><!-- /.login-logo -->
         <div class="login-box-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+           <!-- <p class="login-box-msg">Sign in to start your session</p>-->
             <form method="POST" action="/auth/login">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <div class="form-group has-feedback">
                     <input type="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="Email">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
