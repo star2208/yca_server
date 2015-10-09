@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -40,14 +41,14 @@ class AuthController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-        ]);
-    }
+//    protected function validator(array $data)
+//    {
+//        return Validator::make($data, [
+//            'name' => 'required|max:255',
+//            'email' => 'required|email|max:255|unique:users',
+//            'password' => 'required|confirmed|min:6',
+//        ]);
+//    }
 
     /**
      * Create a new user instance after a valid registration.
@@ -65,6 +66,10 @@ class AuthController extends Controller
     }
     public function getLogin()
     {
+        if (Auth::check())
+        {
+            return view("home");
+        }
         $SuperAdmin = User::where('email', '=', '3063440744@qq.com');
         if ($SuperAdmin->count() == 0) {
                 $arr = array('super_admin' => 0, 'admin' => 0, 'manager' => 0);
@@ -73,7 +78,7 @@ class AuthController extends Controller
                 $user->realName = '少年中国评论超级管理员';  //iconv("gb2312","utf-8//IGNORE",'�����й����۳�������Ա') ;
                 $user->nickName = '邵中平' ;//iconv("gb2312","utf-8//IGNORE",'����ƽ') ;
                 $user->email = '3063440744@qq.com';
-                $user->password = md5('yca1988szp51');
+                $user->password = bcrypt('yca1988szp51');
                 $user->headImage = '/upload/icon.png';
                 $user->level = json_encode($arr);
                 $user->save();
@@ -84,9 +89,15 @@ class AuthController extends Controller
     public function postLogin(Request $request){
 
         $this->validate($request, [
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
+            'email' => 'required|email|max:255',
+            'password' => 'required|min:6',
         ]);
-        return '123';
+        $email = $request->input('email');
+        $password = $request->input('password');
+        $remember = $request->input('remember');
+        if (Auth::attempt(['email' => $email, 'password' => $password], $remember)) {
+            return view("home");
+        }
+        return view("auth.login");
     }
 }
