@@ -68,7 +68,7 @@ class AuthController extends Controller
     {
         if (Auth::check())
         {
-            return view("home");
+            return response() -> view("home");
         }
         $SuperAdmin = User::where('email', '=', '3063440744@qq.com');
         if ($SuperAdmin->count() == 0) {
@@ -96,7 +96,7 @@ class AuthController extends Controller
         $password = $request->input('password');
         $remember = $request->input('remember');
         if (Auth::attempt(['email' => $email, 'password' => $password], $remember)) {
-            return view("home");
+            return response() -> view("home");
         }
         return view("auth.login");
     }
