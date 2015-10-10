@@ -38,7 +38,7 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="index2.html" class="logo"><b>Admin</b>YCA</a>
+        <a href="/" class="logo"><b>Admin</b>YCA</a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
             <!-- Sidebar toggle button-->
@@ -55,22 +55,23 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li class="active treeview">
-                    <a href="/admin/index">
+                    <a href="/">
                         <i class="fa fa-circle-o"></i><span>总览</span>
                     </a>
                 </li>
+                <!--
                 <li class="treeview">
-                    <a href="/review/index">
+                    <a href="/review">
                         <i class="fa fa-edit"></i> <span>简评</span>
                     </a>
-                </li>
+                </li>-->
                 <li>
-                    <a href="/article/index">
+                    <a href="/article">
                         <i class="fa fa-book"></i><span>文章</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/notification/index">
+                    <a href="/notification">
                         <i class="fa fa-calendar"></i> <span>推送任务</span>
                     </a>
                 </li>
@@ -88,7 +89,7 @@
                 <small>APP控制台</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
+                <li><a href="/"><i class="fa fa-dashboard"></i>首页</a></li>
             </ol>
         </section>
 
@@ -223,10 +224,12 @@
                                 </li>
                             </ul>
                         </div><!-- /.box-body -->
+                        <!--
                         <div class="box-footer clearfix no-border btn-group ">
                             <button class="btn btn-default" onclick="window.location.href='/review/create'"><i class="fa fa-plus"></i>添加简评</button>
                             <button class="btn btn-default" onclick="window.location.href='/article/create'"><i class="fa fa-plus"></i>添加文章</button>
                         </div>
+                        -->
                     </div><!-- /.box -->
                 </section><!-- /.Left col -->
             </div><!-- /.row (main row) -->
@@ -237,7 +240,7 @@
         <div class="pull-right hidden-xs">
             <b>Version</b> 2.0
         </div>
-        <strong>Copyright &copy; 2015-3015 <a href="http://www.youngchina.org/">少年中国学会</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2015-3015 <a href="http://youngchina.review/">少年中国评论</a>.</strong> All rights reserved.
     </footer>
 </div><!-- ./wrapper -->
 
