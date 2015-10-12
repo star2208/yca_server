@@ -1,36 +1,6 @@
 @extends('master')
 @section('header')
-@section('header')
-        <!-- Bootstrap 3.3.2 -->
-<link href="http://static.youngchina.review/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<!-- FontAwesome 4.3.0 -->
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<!-- Ionicons 2.0.0 -->
-<link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-<!-- Theme style -->
-<link href="http://static.youngchina.review/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
-<!-- AdminLTE Skins. Choose a skin from the css/skins
-     folder instead of downloading all of them to reduce the load. -->
-<link href="http://static.youngchina.review/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
-<!-- iCheck -->
-<link href="http://static.youngchina.review/plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
-<!-- Morris chart -->
-<link href="http://static.youngchina.review/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
-<!-- jvectormap -->
-<link href="http://static.youngchina.review/plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-<!-- Date Picker -->
-<link href="http://static.youngchina.review/plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
-<!-- Daterange picker -->
-<link href="http://static.youngchina.review/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
-<!-- bootstrap wysihtml5 - text editor -->
-<link href="http://static.youngchina.review/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
-
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-<![endif]-->
+<link href="http://static.youngchina.review/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 @endsection
 @section('content')
     <body class="skin-blue">
@@ -99,24 +69,59 @@
                 <div class="row">
                     <!-- left column -->
                     <div class="col-md-6">
+                        <div class="box box-success">
+                            <div class="box-header">
+                                <h3 class="box-title">基础信息</h3>
+                            </div>
+                            <div class="box-body">
+                                <div class="input-group">
+                                    <span class="input-group-addon">标题</span>
+                                    <input type="text" class="form-control" placeholder="输入标题内容">
+                                    <!--
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-info btn-flat" type="button">确定</button>
+                                    </span>
+                                    -->
+                                </div>
+                                <br>
+                                <div class="input-group">
+                                    <span class="input-group-addon">作者</span>
+                                    <select class="form-control">
+                                        <option>YCA1</option>
+                                        <option>option 2</option>
+                                        <option>option 3</option>
+                                        <option>option 4</option>
+                                        <option>option 5</option>
+                                    </select>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">发布时间</span>
+                                        <input size="16" type="text" value="2012-06-15 14:45" readonly class="form_datetime form-control">
+                                    </div><!-- /.input group -->
+                                </div>
+                            </div><!-- /.box-body -->
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">创建文章</button>
+                            </div>
+                        </div>
                         <!-- general form elements -->
                         <div class="box box-primary">
                             <div class="box-header">
-                                <h3 class="box-title">编辑</h3>
+                                <h3 class="box-title">封面</h3>
                             </div><!-- /.box-header -->
                             <!-- form start -->
                             <form role="form">
                                 <div class="box-body">
                                     <div class="form-group">
-                                        <label for="exampleInputFile">封面</label>
                                         <input type="file" id="exampleInputFile" name="uploadFile"  enctype="multipart/form-data">
                                         <p class="help-block">封面图片，640*320像素，且经过压缩处理。由于图片服务器可能被随时干掉，编辑请保留所有图片存档以便恢复。</p>
                                     </div>
                                 </div><!-- /.box-body -->
 
                                 <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary">提交</button>
-                                    <button type="submit" class="btn btn-primary">预览</button>
+                                    <button type="submit" class="btn btn-primary">上传</button>
                                 </div>
                             </form>
                         </div><!-- /.box -->
@@ -143,43 +148,21 @@
             <strong>Copyright &copy; 2015-3015 <a href="http://youngchina.review/">少年中国评论</a>.</strong> All rights reserved.
         </footer>
     </div><!-- ./wrapper -->
+    @section('footer')
+    <script type="text/javascript" src="http://static.youngchina.review/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="http://static.youngchina.review/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
 
-    <!-- jQuery 2.1.3 -->
-    <script src="http://static.youngchina.review/plugins/jQuery/jQuery-2.1.3.min.js"></script>
-    <!-- jQuery UI 1.11.2 -->
-    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.min.js" type="text/javascript"></script>
-    <!-- Bootstrap 3.3.2 JS -->
-    <script src="http://static.youngchina.review/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <!-- Morris.js charts -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="http://static.youngchina.review/plugins/morris/morris.min.js" type="text/javascript"></script>
-    <!-- Sparkline -->
-    <script src="http://static.youngchina.review/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
-    <!-- jvectormap -->
-    <script src="http://static.youngchina.review/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
-
-    <script src="http://static.youngchina.review/plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="http://static.youngchina.review/plugins/knob/jquery.knob.js" type="text/javascript"></script>
-    <!-- daterangepicker -->
-    <script src="http://static.youngchina.review/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-    <!-- datepicker -->
-    <script src="http://static.youngchina.review/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
-    <!-- Bootstrap WYSIHTML5 -->
-    <script src="http://static.youngchina.review/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
-    <!-- iCheck -->
-    <script src="http://static.youngchina.review/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
-    <!-- Slimscroll -->
-    <script src="http://static.youngchina.review/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-    <!-- FastClick -->
-    <script src='http://static.youngchina.review/plugins/fastclick/fastclick.min.js'></script>
-    <!-- AdminLTE App -->
-    <script src="http://static.youngchina.review/dist/js/app.min.js" type="text/javascript"></script>
-
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="http://static.youngchina.review/dist/js/pages/dashboard.js" type="text/javascript"></script>
-
-    <!-- AdminLTE for demo purposes -->
-    <script src="http://static.youngchina.review/dist/js/demo.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $('.form_datetime').datetimepicker({
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            forceParse: 0,
+            showMeridian: 1
+        });
+    </script>
+    @endsection
     </body>
 @endsection

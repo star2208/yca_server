@@ -66,10 +66,6 @@ class AuthController extends Controller
     }
     public function getLogin()
     {
-        if (Auth::check())
-        {
-            return response() -> view("home");
-        }
         $SuperAdmin = User::where('email', '=', '3063440744@qq.com');
         if ($SuperAdmin->count() == 0) {
                 $arr = array('super_admin' => 0, 'admin' => 0, 'manager' => 0);

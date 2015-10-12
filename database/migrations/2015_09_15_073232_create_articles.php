@@ -15,11 +15,10 @@ class CreateArticles extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title')->index();
-            $table->json('author');
+            $table->string('authorId')->index();
             $table->json('content');
             $table->integer('type')->index();
             $table->string('cover');
-            $table->json('tag');
             $table->dateTime('publishTime')->index();
             $table->softDeletes()->index();
             $table->timestamps();

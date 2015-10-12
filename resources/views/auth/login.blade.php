@@ -1,23 +1,13 @@
 @extends('master')
 @section('header')
-<!-- Bootstrap 3.3.2 -->
-<link href="http://static.youngchina.review/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<!-- Font Awesome Icons -->
-<link href="http://static.youngchina.review/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<!-- Theme style -->
-<link href="http://static.youngchina.review/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
-<!-- iCheck -->
-<link href="http://static.youngchina.review/plugins/iCheck/square/blue.css" rel="stylesheet" type="text/css" />
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-<![endif]-->
+        <!-- iCheck -->
+    <link href="http://cdn.bootcss.com/iCheck/1.0.1/skins/square/blue.css" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
     <body class="login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="../../index2.html"><b>Admin</b>YCA</a>
+            <a href="#"><b>Admin</b>YCA</a>
         </div><!-- /.login-logo -->
         <div class="login-box-body">
             @if (count($errors) > 0)
@@ -55,13 +45,7 @@
             </form>
         </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
-
-    <!-- jQuery 2.1.3 -->
-    <script src="http://static.youngchina.review/plugins/jQuery/jQuery-2.1.3.min.js"></script>
-    <!-- Bootstrap 3.3.2 JS -->
-    <script src="http://static.youngchina.review/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <!-- iCheck -->
-    <script src="http://static.youngchina.review/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
+    @section('footer')
     <script>
         $(function () {
             $('input').iCheck({
@@ -72,4 +56,5 @@
         });
     </script>
     </body>
+    @endsection
 @endsection
