@@ -103,7 +103,8 @@
                                 </div>
                             </div><!-- /.box-body -->
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">创建文章</button>
+                                <button type="submit" class="btn btn-primary">刷新预览</button>
+                                <button type="submit" class="btn btn-primary">发布文章</button>
                             </div>
                         </div>
                         <!-- general form elements -->
@@ -125,6 +126,18 @@
                                 </div>
                             </form>
                         </div><!-- /.box -->
+                        <div class="box box-danger">
+                            <div class="box-header">
+                                <h3 class="box-title">文章内容</h3>
+                            </div>
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">添加大标题</button>
+                                <button type="submit" class="btn btn-primary">添加小标题</button>
+                                <button type="submit" class="btn btn-primary">添加插图</button>
+                                <button type="submit" class="btn btn-primary">添加一段正文</button>
+                                <button type="submit" class="btn btn-primary">添加一段正文</button>
+                            </div>
+                        </div>
                     </div><!--/.col (left) -->
                     <!-- right column -->
                     <div class="col-md-6">
