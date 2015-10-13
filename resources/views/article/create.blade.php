@@ -113,7 +113,7 @@
                                 <h3 class="box-title">封面</h3>
                             </div><!-- /.box-header -->
                             <!-- form start -->
-                            <form role="form">
+                            <form role="form"  method="POST" action="/file">
                                 <div class="box-body">
                                     <div class="form-group">
                                         <input type="file" id="exampleInputFile" name="uploadFile"  enctype="multipart/form-data">
