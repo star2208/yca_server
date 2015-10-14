@@ -28,4 +28,4 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::get('article', 'ArticleController@index');
 Route::get('article/create', 'ArticleController@create');
 
-Route::post('/file', 'FileController@postFile');
+Route::post('/file', 'StorageController@postFile');

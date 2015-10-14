@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 use Intervention\Image\Facades\Image;
-use GetId3\GetId3Core as GetId3;
-use App\Models\Storage;
-use App\Models\UserFile;
+use GetId3_GetId3 as GetId3;
+use App\Storage;
+use App\UserFile;
 
 /**
  * 文件管理器
@@ -28,10 +28,9 @@ class StorageController extends Controller
 
     public function __construct(Request $request, Guard $auth)
     {
-        parent::__construct($request, $auth);
-
+        //parent::__construct($request, $auth);
+        $this->middleware('auth');
         $this->middleware('json');
-
         $this->storage_path = base_path('storage/files') . DIRECTORY_SEPARATOR;
     }
 
@@ -209,7 +208,7 @@ class StorageController extends Controller
     public function postFile(Request $request, GetId3 $getId3)
     {
         // 验证数据。
-        if (! $request->hasFile($this->filed_name)) {
+        if (!$request->hasFile($this->filed_name)) {
             return response('必须提供 file 字段数据。', 402);
         }
 

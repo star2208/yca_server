@@ -113,10 +113,10 @@
                                 <h3 class="box-title">封面</h3>
                             </div><!-- /.box-header -->
                             <!-- form start -->
-                            <form role="form"  method="POST" action="/file">
+                            <form role="form"  method="POST" action="/file" enctype="multipart/form-data">
                                 <div class="box-body">
                                     <div class="form-group">
-                                        <input type="file" id="exampleInputFile" name="uploadFile"  enctype="multipart/form-data">
+                                            <input type="file" name="file">
                                         <p class="help-block">封面图片，640*320像素，且经过压缩处理。由于图片服务器可能被随时干掉，编辑请保留所有图片存档以便恢复。</p>
                                     </div>
                                 </div><!-- /.box-body -->
