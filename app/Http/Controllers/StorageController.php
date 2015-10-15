@@ -3,10 +3,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
-use Intervention\Image\Facades\Image;
-use GetId3_GetId3 as GetId3;
-use App\Storage;
-use App\UserFile;
+//use Intervention\Image\Facades\Image;
+use GetId3\GetId3Core as GetId3;
+use Storage;
+use App\File;
 
 /**
  * 文件管理器
@@ -214,48 +214,44 @@ class StorageController extends Controller
 
         // 取得上传的文件。
         $file = $request->file($this->filed_name);
+//
+//        // 获取文件ID3信息。
+//        $info = $getId3->analyze($file->getRealPath());
+//
+//        // 修复ID3库对不支持的文件格式的处理。
+//        if (! isset($info['mime_type'])) {
+//            $info['mime_type'] = mime_content_type($file->getRealPath());
+//        }
+//        $info['fileformat'] = $file->getClientOriginalExtension();
+        Storage::disk('s3')->put($file->getClientOriginalName(), file_get_contents($file));
+        //Storage::put($file->getClientOriginalName(), file_get_contents($file));
 
-        // 获取文件ID3信息。
-        $info = $getId3->analyze($file->getRealPath());
+        //生成图片的UUID
+//        $storage = new Storage();
+//        $storage->hash = $hash;
+//        $storage->format = @$info['fileformat'] ?  : '';
+//        $storage->size = @$info['filesize'] ?  : 0;
+//        $storage->width = @$info['video']['resolution_x'] ?  : 0;
+//        $storage->height = @$info['video']['resolution_y'] ?  : 0;
+//        $storage->seconds = @$info['playtime_seconds'] ?  : 0;
+//        $storage->mime = @$info['mime_type'] ?  : '';
+//        $storage->path = $filename;
+//        $storage->save();
+//        // 移动文件到存储目录
+//        $file->move($this->storage_path, $filename);
+//
+//
+//        // 关联用户的文件。
+//        $userfile = new UserFile();
+//        $userfile->user()->associate($this->auth->user());
+//        $userfile->storage()->associate($storage);
+//        $userfile->filename = $file->getClientOriginalName();
+//        $userfile->save();
 
-        // 修复ID3库对不支持的文件格式的处理。
-        if (! isset($info['mime_type'])) {
-            $info['mime_type'] = mime_content_type($file->getRealPath());
-        }
-        $info['fileformat'] = $file->getClientOriginalExtension();
-
-        // 取得文件的hash与文件名。
-        $hash = md5_file($file->getRealPath());
-        $filename = $hash . '.' . $file->getClientOriginalExtension();
-
-        // 取得hash的文件。
-        $storage = Storage::find($hash);
-
-        // 如果文件不存在，则创建文件。
-        if (is_null($storage)) {
-            $storage = new Storage();
-            $storage->hash = $hash;
-            $storage->format = @$info['fileformat'] ?  : '';
-            $storage->size = @$info['filesize'] ?  : 0;
-            $storage->width = @$info['video']['resolution_x'] ?  : 0;
-            $storage->height = @$info['video']['resolution_y'] ?  : 0;
-            $storage->seconds = @$info['playtime_seconds'] ?  : 0;
-            $storage->mime = @$info['mime_type'] ?  : '';
-            $storage->path = $filename;
-            $storage->save();
-            // 移动文件到存储目录
-            $file->move($this->storage_path, $filename);
-        }
-
-        // 关联用户的文件。
-        $userfile = new UserFile();
-        $userfile->user()->associate($this->auth->user());
-        $userfile->storage()->associate($storage);
-        $userfile->filename = $file->getClientOriginalName();
-        $userfile->save();
+        $response_data = $file->getClientOriginalName();
 
         // 返回结果。
-        return $userfile;
+        return $response_data;
     }
 
     /**

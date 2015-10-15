@@ -64,10 +64,10 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key'    => 'your-key',
-            'secret' => 'your-secret',
-            'region' => 'your-region',
-            'bucket' => 'your-bucket',
+            'key'    => 'AKIAJK5CKPT5SNLNFHBA',
+            'secret' => 'uYwz0qfTpgTxfp+y5wSdWlPFbpDtT649prnc22BU',
+           // 'region' => 'ap-northeast-1',
+            'bucket' => 'ycareview',
         ],
 
         'rackspace' => [
