@@ -80,6 +80,12 @@ return [
             'url_type'  => 'publicURL',
         ],
 
+        'qiniu' => [
+            'driver' => 'qiniu',
+            'domain' => '7xnehh.com1.z0.glb.clouddn.com', //你的七牛域名
+            'access_key' => 'ST3NacqqjRyK9Q3opSoJ930kPytpc5xLHccZXFQ5', //AccessKey
+            'secret_key' => '9DXpylrNFWGOgzoSTiOPDS2MqHzo8ryQLadTTrds', //SecretKey
+            'bucket' => 'ycamobile', //Bucket名字
+        ],
     ],
-
 ];

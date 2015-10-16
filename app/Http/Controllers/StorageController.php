@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\Guard;
 //use Intervention\Image\Facades\Image;
 use GetId3\GetId3Core as GetId3;
 use Storage;
+use Ramsey\Uuid\Uuid;
 use App\File;
 
 /**
@@ -214,17 +215,22 @@ class StorageController extends Controller
 
         // 取得上传的文件。
         $file = $request->file($this->filed_name);
-//
-//        // 获取文件ID3信息。
-//        $info = $getId3->analyze($file->getRealPath());
-//
-//        // 修复ID3库对不支持的文件格式的处理。
-//        if (! isset($info['mime_type'])) {
-//            $info['mime_type'] = mime_content_type($file->getRealPath());
-//        }
-//        $info['fileformat'] = $file->getClientOriginalExtension();
-        Storage::disk('s3')->put($file->getClientOriginalName(), file_get_contents($file));
-        //Storage::put($file->getClientOriginalName(), file_get_contents($file));
+
+        // 获取文件ID3信息。
+        $info = $getId3->analyze($file->getRealPath());
+
+        // 修复ID3库对不支持的文件格式的处理。
+        if (! isset($info['mime_type'])) {
+            $info['mime_type'] = mime_content_type($file->getRealPath());
+        }
+        $info['fileformat'] = $file->getClientOriginalExtension();
+
+        $filename = Uuid::uuid1()->toString().'.'.$info['fileformat'];
+
+        Storage::disk('local')->put($filename, file_get_contents($file));
+        Storage::disk('qiniu')->put($filename, file_get_contents($file));
+        $disk = Storage::disk('qiniu');
+
 
         //生成图片的UUID
 //        $storage = new Storage();
@@ -248,42 +254,14 @@ class StorageController extends Controller
 //        $userfile->filename = $file->getClientOriginalName();
 //        $userfile->save();
 
-        $response_data = $file->getClientOriginalName();
 
         // 返回结果。
-        return $response_data;
+        $data = [
+            'name' => $file->getClientOriginalName(),
+            'size' => $info['filesize'],
+            'url' => $disk->getDriver()->downloadUrl($filename),
+        ];
+        return $data;
     }
 
-    /**
-     * 使用文件 hash 上传文件
-     */
-    public function postFileWithHash(Request $request)
-    {
-        // 验证数据。
-        $this->validate($request, [
-            'hash' => [
-                'required',
-                'exists:storage,hash'
-            ],
-            'filename' => [
-                'required'
-            ]
-        ]);
-
-        // 取得提交的文件 hash。
-        $hash = $request->input('hash');
-
-        // 取得hash的文件。
-        $storage = Storage::find($hash);
-
-        // 关联用户的文件。
-        $userfile = new UserFile();
-        $userfile->user()->associate($this->auth->user());
-        $userfile->storage()->associate($storage);
-        $userfile->filename = $request->input('filename');
-        $userfile->save();
-
-        // 返回结果。
-        return UserFile::find($userfile->id);
-    }
 }
