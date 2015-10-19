@@ -50,6 +50,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="/author">
+                            <i class="fa fa-edit"></i> <span>作者</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="/notification">
                             <i class="fa fa-calendar"></i> <span>推送任务</span>
                         </a>
@@ -82,39 +87,35 @@
                             <div class="box-header">
                                 <h3 class="box-title">基础信息</h3>
                             </div>
-                            <div class="box-body">
-                                <div class="input-group">
-                                    <span class="input-group-addon">标题</span>
-                                    <input type="text" class="form-control" placeholder="输入标题内容">
-                                    <!--
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-info btn-flat" type="button">确定</button>
-                                    </span>
-                                    -->
-                                </div>
-                                <br>
-                                <div class="input-group">
-                                    <span class="input-group-addon">作者</span>
-                                    <select class="form-control">
-                                        <option>YCA1</option>
-                                        <option>option 2</option>
-                                        <option>option 3</option>
-                                        <option>option 4</option>
-                                        <option>option 5</option>
-                                    </select>
-                                </div>
-                                <br>
-                                <div class="form-group">
+                            <form role="form"  action="article/create" method="post" >
+                                <div class="box-body">
                                     <div class="input-group">
-                                        <span class="input-group-addon">发布时间</span>
-                                        <input size="16" type="text" value="2012-06-15 14:45" readonly class="form_datetime form-control">
-                                    </div><!-- /.input group -->
+                                        <span class="input-group-addon">标题</span>
+                                        <input name = "title" type="text" class="form-control" placeholder="输入标题内容">
+                                    </div>
+                                    <br>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">作者</span>
+                                        <select class="form-control" name="author" >
+                                            <option>YCA1</option>
+                                            <option>option 2</option>
+                                            <option>option 3</option>
+                                            <option>option 4</option>
+                                            <option>option 5</option>
+                                        </select>
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">发布时间</span>
+                                            <input name = "" size="16" type="text" value="2012-06-15 14:45" readonly class="form_datetime form-control">
+                                        </div><!-- /.input group -->
+                                    </div>
+                                </div><!-- /.box-body -->
+                                <div class="box-footer">
+                                    <button type="submit" class="btn btn-primary">创建文章</button>
                                 </div>
-                            </div><!-- /.box-body -->
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">刷新预览</button>
-                                <button type="submit" class="btn btn-primary">发布文章</button>
-                            </div>
+                            </form>
                         </div>
                         <!-- general form elements -->
                         <div class="box box-primary">
@@ -133,7 +134,7 @@
 
                                     <div class="progress" style="display: none;">
                                         <span class="bar"></span><span class="percent">0%</span >
-                                    </div>s
+                                    </div>
                                     <div class="files"></div>
                                 </div><!-- /.box-body -->
                                 <div class="box-footer">
@@ -142,14 +143,13 @@
                         </div><!-- /.box -->
                         <div class="box box-danger">
                             <div class="box-header">
-                                <h3 class="box-title">文章内容</h3>
+                                <h3 class="box-title">添加文章内容</h3>
                             </div>
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">添加大标题</button>
-                                <button type="submit" class="btn btn-primary">添加小标题</button>
-                                <button type="submit" class="btn btn-primary">添加插图</button>
-                                <button type="submit" class="btn btn-primary">添加一段正文</button>
-                                <button type="submit" class="btn btn-primary">添加一段正文</button>
+                                <button type="submit" class="btn btn-primary small.margin">大标题</button>
+                                <button type="submit" class="btn btn-primary small.margin">小标题</button>
+                                <button type="submit" class="btn btn-primary small.margin">插图</button>
+                                <button type="submit" class="btn btn-primary small.margin">一段正文</button>
                             </div>
                         </div>
                     </div><!--/.col (left) -->
@@ -196,6 +196,7 @@
             var progress = $(".progress");
             var files = $(".files");
             var btn = $(".btn span");
+            var fileupload = $("#fileupload");
             $("#fileupload").wrap("<form id='myupload'  role='form' action='/file' method='post' enctype='multipart/form-data'></form>");
             $("#fileupload").change(function(){ //选择文件
                 $("#myupload").ajaxSubmit({
@@ -215,13 +216,14 @@
                     },
                     success: function(data) { //成功
                         //获得后台返回的json数据，显示文件名，大小，以及删除按钮
-                        console.log(data);
                         var obj = jQuery.parseJSON(data.data);
-                        files.html("<b>"+obj.name+"("+obj.size+"k)</b><span class='delimg btn btn-primary' rel='"+obj.url+"'>删除</span>");
+                        console.log(obj);
+                        files.html(
+                            "<div class='input-group'><div class='input-group-btn'><button id='delete'  rel='"+obj.uuid+"' type='button' class='delimg btn btn-danger '>删除</button></div><!-- /btn-group --><input type='text' class='form-control' readonly value='" + obj.name +"("+obj.size +"k)'"+"></div>"
+                        );
                         //显示上传后的图片
                         var img = obj.url;
                         showimg.html("<img src='"+img+"'>");
-                        btn.html("添加附件"); //上传按钮还原
                     },
                     error:function(xhr){ //上传失败
                         btn.html("上传失败");
@@ -230,18 +232,20 @@
                     }
                 });
             });
-        });
-        $(function () {
-            $(".delimg").on('click',function(){
-                var pic = $(this).attr("rel");
-                $.post("action.php?act=delimg",{imagename:pic},function(msg){
-                    if(msg==1){
-                        files.html("删除成功.");
-                        showimg.empty(); //清空图片
-                        progress.hide(); //隐藏进度条
-                    }else{
-                        alert(msg);
-                    }
+            $(function () {
+                $(document).on('click',"#delete",function(){
+                    var pic = $(this).attr("rel");
+                    $.post("/file/delete",{id:pic},function(msg){
+                        console.log(msg);
+                        if(msg.status == 200){
+                            files.html("<span class='label label-success'>删除成功</span>");
+                            showimg.empty(); //清空图片
+                            progress.hide(); //隐藏进度条
+                            fileupload.val('');
+                        }else{
+                            files.html("删除失败.");
+                        }
+                    });
                 });
             });
         });

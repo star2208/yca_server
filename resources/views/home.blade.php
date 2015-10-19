@@ -28,15 +28,14 @@
                         <i class="fa fa-circle-o"></i><span>总览</span>
                     </a>
                 </li>
-                <!--
-                <li class="treeview">
-                    <a href="/review">
-                        <i class="fa fa-edit"></i> <span>简评</span>
-                    </a>
-                </li>-->
                 <li>
                     <a href="/article">
                         <i class="fa fa-book"></i><span>文章</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/author">
+                        <i class="fa fa-edit"></i> <span>作者</span>
                     </a>
                 </li>
                 <li>

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArticles extends Migration
+class CreateAuthorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,11 @@ class CreateArticles extends Migration
      */
     public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::create('authors', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title')->index();
-            $table->morphs('author');
-            $table->json('content');
-            $table->integer('type')->index();
-            $table->string('cover');
-            $table->dateTime('publishTime')->index();
+            $table->string('name')->index();
+            $table->string('headImage');
+            $table->string('describe')->index();
             $table->softDeletes()->index();
             $table->timestamps();
         });
@@ -32,7 +29,6 @@ class CreateArticles extends Migration
      */
     public function down()
     {
-        Schema::drop('articles');
+        Schema::drop('authors');
     }
 }
- 

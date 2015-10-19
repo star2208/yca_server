@@ -8,6 +8,7 @@ use GetId3\GetId3Core as GetId3;
 use Storage;
 use Ramsey\Uuid\Uuid;
 use App\File;
+use Auth;
 
 /**
  * 文件管理器
@@ -29,7 +30,7 @@ class StorageController extends Controller
 
     public function __construct(Request $request, Guard $auth)
     {
-        //parent::__construct($request, $auth);
+        parent::__construct($request, $auth);
         $this->middleware('auth');
         $this->middleware('json');
         $this->storage_path = base_path('storage/files') . DIRECTORY_SEPARATOR;
@@ -225,43 +226,45 @@ class StorageController extends Controller
         }
         $info['fileformat'] = $file->getClientOriginalExtension();
 
-        $filename = Uuid::uuid1()->toString().'.'.$info['fileformat'];
+        $fileuuid = Uuid::uuid1()->toString();
+        $filename = $fileuuid.'.'.$info['fileformat'];
 
         Storage::disk('local')->put($filename, file_get_contents($file));
-        Storage::disk('qiniu')->put($filename, file_get_contents($file));
         $disk = Storage::disk('qiniu');
+        $disk->put($filename, file_get_contents($file));
 
-
-        //生成图片的UUID
-//        $storage = new Storage();
-//        $storage->hash = $hash;
-//        $storage->format = @$info['fileformat'] ?  : '';
-//        $storage->size = @$info['filesize'] ?  : 0;
-//        $storage->width = @$info['video']['resolution_x'] ?  : 0;
-//        $storage->height = @$info['video']['resolution_y'] ?  : 0;
-//        $storage->seconds = @$info['playtime_seconds'] ?  : 0;
-//        $storage->mime = @$info['mime_type'] ?  : '';
-//        $storage->path = $filename;
-//        $storage->save();
-//        // 移动文件到存储目录
-//        $file->move($this->storage_path, $filename);
-//
-//
-//        // 关联用户的文件。
-//        $userfile = new UserFile();
-//        $userfile->user()->associate($this->auth->user());
-//        $userfile->storage()->associate($storage);
-//        $userfile->filename = $file->getClientOriginalName();
-//        $userfile->save();
-
-
-        // 返回结果。
         $data = [
             'name' => $file->getClientOriginalName(),
             'size' => $info['filesize'],
             'url' => $disk->getDriver()->downloadUrl($filename),
+            'uuid' => $fileuuid,
         ];
+
+        //生成图片的UUID
+        $file = new File();
+        $file->id = $fileuuid;
+        $file->format = @$info['fileformat'] ?  : '';
+        $file->size = @$info['filesize'] ?  : 0;
+        $file->width = @$info['video']['resolution_x'] ?  : 0;
+        $file->height = @$info['video']['resolution_y'] ?  : 0;
+        $file->seconds = @$info['playtime_seconds'] ?  : 0;
+        $file->mime = @$info['mime_type'] ?  : '';
+        $file->user()->associate($this->auth->user());
+        $file->save();
         return $data;
     }
-
+    /**
+     * 删除文件
+     */
+    public function deleteFile(Request $request, GetId3 $getId3)
+    {
+        $fileuuid = $request->input('id');
+        $file = File::where('id', '=', $fileuuid)->first();
+        $filename = $fileuuid.'.'.$file->format;
+        if($file) {
+            Storage::disk('local')->delete($filename);
+            Storage::disk('qiniu')->delete($filename);
+        }
+        return $fileuuid;
+    }
 }
