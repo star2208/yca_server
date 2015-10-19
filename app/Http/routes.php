@@ -12,12 +12,13 @@ Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 //作者
 Route::get('author', 'AuthorController@index');
+Route::get('author/create', 'AuthorController@show');
 Route::post('author/create', 'AuthorController@create');
 Route::delete('author/delete','AuthorController@destroy');
 Route::post('author/update', 'AuthorController@update');
 //文章
 Route::get('article', 'ArticleController@index');
-Route::get('article/create', 'ArticleController@create');
+Route::get('article/create', 'ArticleController@show');
 //文件
 Route::post('/file', 'StorageController@postFile');
 Route::post('/file/delete', 'StorageController@deleteFile');

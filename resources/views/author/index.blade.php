@@ -134,7 +134,7 @@
                                 </div>
                                 -->
                                 <div class="box-footer">
-                                    <button class="btn btn-default" onclick="window.location.href='/article/create'"><i class="fa fa-plus"></i>添加作者</button>
+                                    <button class="btn btn-default" onclick="window.location.href='/author/create'"><i class="fa fa-plus"></i>添加作者</button>
                                 </div>
                             </div><!-- /.box-body -->
                         </div><!-- /.box -->

@@ -30,7 +30,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return response()->view('article.create');
+
     }
 
     /**
@@ -50,9 +50,9 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        return response()->view('article.create');
     }
 
     /**
