@@ -17,7 +17,7 @@ class File extends Model
      */
     public function thumbnails()
     {
-        return $this->belongsToMany('App\File', 'thumbnails', 'id', 'file_id');
+        return $this->hasMany('App\Thumbnail', 'file_id', 'id');
     }
     public function user()
     {

@@ -145,6 +145,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         itbdw\QiniuStorage\QiniuFilesystemServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 

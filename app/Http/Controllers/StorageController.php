@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Thumbnail;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 use Intervention\Image\Facades\Image;
@@ -83,46 +84,27 @@ class StorageController extends Controller
                     if (is_null($height) && ! is_null($width)) {
                         $height = ceil($file->height / $file->width * $width);
                     }
-                    $thumbnail = $storage->thumbnails()
+                    $thumbnail = $file->thumbnails()
                         ->where('width', $width)
                         ->where('height', $height)
                         ->first();
 
-                    // 如果指定尺寸的缩略图不存在，则生成并保存到数据库中。
                     if (is_null($thumbnail)) {
 
-                        // 在缓存目录内创建一个pic前缀的临时文件，并修改推展名。
-                        $tmp = tempnam(storage_path('cache'), 'pic');
-                        rename($tmp, $tmp .= '.jpg');
-
-                        // 打开原图。
-                        $image = Image::make($this->storage_path . $storage->path);
-                        // 生成一张需求尺寸的图片，写到创建的临时文件内。
-                        // $image->resize($width, $height);
+                        $image = Image::make(Storage::disk('local')->get($filename));
                         $image->fit($width, $height);
-                        $image->save($tmp, 60);
+                        $thumbnail_filename = Uuid::uuid1()->toString().'.'.$extension;
+                        Storage::disk('local')->put($thumbnail_filename, $image->stream());
+                        Storage::disk('qiniu')->put($thumbnail_filename, $image->stream());
 
-                        // 计算文件的hash，并移动文件到文件存储目录。
-                        $_hash = md5_file($tmp);
-                        $_filename = $_hash . '.' . $image->extension;
-                        $_storage = $this->storage_path . $_filename;
-                        copy($tmp, $_storage);
-                        unlink($tmp);
 
                         // 保存图片信息到数据库。
-                        $thumbnail = Storage::find($_hash);
-                        if (is_null($thumbnail)) {
-                            $thumbnail = new Storage();
-                            $thumbnail->hash = $_hash;
-                        }
-                        $thumbnail->size = filesize($_storage);
-                        $thumbnail->width = $image->width();
-                        $thumbnail->height = $image->height();
-                        $thumbnail->mime = $image->mime;
-                        $thumbnail->format = 'jpeg';
-                        $thumbnail->path = $_filename;
+                        $thumbnail = new Thumbnail();
+                        $thumbnail -> file_id = $uuid;
+                        $thumbnail -> width = $width;
+                        $thumbnail -> height = $height;
                         $thumbnail->save();
-                        $storage->thumbnails()->attach($_hash);
+                        $file->thumbnails()->attach(1);
                     }
 
                     // 此次请求使用此缩略图。
