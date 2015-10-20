@@ -15,10 +15,12 @@ Route::get('author', 'AuthorController@index');
 Route::get('author/create', 'AuthorController@show');
 Route::post('author/create', 'AuthorController@create');
 Route::delete('author/delete','AuthorController@destroy');
-Route::post('author/update', 'AuthorController@update');
+Route::post('author/update/{id}', 'AuthorController@update');
+Route::get('author/edit/{id}', 'AuthorController@edit');
 //文章
 Route::get('article', 'ArticleController@index');
 Route::get('article/create', 'ArticleController@show');
 //文件
 Route::post('/file', 'StorageController@postFile');
+Route::get('/file', 'StorageController@getFile');
 Route::post('/file/delete', 'StorageController@deleteFile');

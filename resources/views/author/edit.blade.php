@@ -1,6 +1,5 @@
 @extends('master')
 @section('header')
-<link href="http://static.youngchina.review/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 <style type="text/css">
     .demo{width:620px; margin:30px auto}
     .demo p{line-height:32px}
@@ -37,8 +36,8 @@
                     <small>APP控制台</small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="/article"><i class="fa fa-dashboard"></i>文章</a></li>
-                    <li class="active">创建文章</li>
+                    <li><a href="/author"><i class="fa fa-dashboard"></i>作者</a></li>
+                    <li class="active">编辑作者</li>
                 </ol>
             </section>
 
@@ -46,54 +45,28 @@
             <section class="content">
                 <div class="row">
                     <!-- left column -->
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="box box-success">
                             <div class="box-header">
-                                <h3 class="box-title">基础信息</h3>
+                                <h3 class="box-title">作者信息</h3>
                             </div>
-                            <form role="form"  action="article/create" method="post" >
+                            <form role="form"  action="/author/create" method="post" >
                                 <div class="box-body">
                                     <div class="input-group">
-                                        <span class="input-group-addon">标题</span>
-                                        <input name = "title" type="text" class="form-control" placeholder="输入标题内容">
+                                        <span class="input-group-addon">姓名</span>
+                                        <input name = "name" type="text" class="form-control" placeholder="输入作者姓名" value="<?php echo($author->name);?>">
                                     </div>
                                     <br>
                                     <div class="input-group">
-                                        <span class="input-group-addon">作者</span>
-                                        <select class="form-control" name="author" >
-                                            <option>YCA1</option>
-                                            <option>option 2</option>
-                                            <option>option 3</option>
-                                            <option>option 4</option>
-                                            <option>option 5</option>
-                                        </select>
-                                    </div>
-                                    <br>
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">发布时间</span>
-                                            <input name = "" size="16" type="text" value="2012-06-15 14:45" readonly class="form_datetime form-control">
-                                        </div><!-- /.input group -->
+                                        <span class="input-group-addon">简介</span>
+                                        <input name = "describe" type="text" class="form-control" placeholder="输入作者简介，例如：谈笑风生的长者" value="<?php echo($author->describe);?>">
                                     </div>
                                 </div><!-- /.box-body -->
-                                <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary">创建文章</button>
-                                </div>
-                            </form>
-                        </div>
-                        <!-- general form elements -->
-                        <div class="box box-primary">
-                            <div class="box-header">
-                                <h3 class="box-title">封面</h3>
-                            </div><!-- /.box-header -->
-                            <!-- form start -->
-                            <!--
-                            <form role="form"  method="POST" action="/file" enctype="multipart/form-data">
-                            -->
+
                                 <div class="box-body">
                                     <div class="form-group">
                                             <input id="fileupload" type="file" name="file">
-                                        <p class="help-block">封面图片，640*320像素，且经过压缩处理。由于图片服务器可能被随时干掉，编辑请保留所有图片存档以便恢复。</p>
+                                        <p class="help-block">头像图片，320*320像素</p>
                                     </div>
 
                                     <div class="progress" style="display: none;">
@@ -101,34 +74,13 @@
                                     </div>
                                     <div class="files"></div>
                                 </div><!-- /.box-body -->
+                                <div id="showimg"></div>
                                 <div class="box-footer">
-                                    <div id="showimg"></div>
+                                    <button type="submit" class="btn btn-primary">创建作者</button>
                                 </div>
+                            </form>
                         </div><!-- /.box -->
-                        <div class="box box-danger">
-                            <div class="box-header">
-                                <h3 class="box-title">添加文章内容</h3>
-                            </div>
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-primary small.margin">大标题</button>
-                                <button type="submit" class="btn btn-primary small.margin">小标题</button>
-                                <button type="submit" class="btn btn-primary small.margin">插图</button>
-                                <button type="submit" class="btn btn-primary small.margin">一段正文</button>
-                            </div>
-                        </div>
                     </div><!--/.col (left) -->
-                    <!-- right column -->
-                    <div class="col-md-6">
-                        <!-- general form elements disabled -->
-                        <div class="box box-warning">
-                            <div class="box-header">
-                                <h3 class="box-title">预览</h3>
-                            </div><!-- /.box-header -->
-                            <div class="box-body">
-
-                            </div><!-- /.box-body -->
-                        </div><!-- /.box -->
-                    </div><!--/.col (right) -->
                 </div>   <!-- /.row -->
             </section><!-- /.content -->
         </div><!-- /.content-wrapper -->
@@ -140,19 +92,8 @@
         </footer>
     </div><!-- ./wrapper -->
     @section('footer')
-    <script type="text/javascript" src="http://static.youngchina.review/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-    <script type="text/javascript" src="http://static.youngchina.review/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
     <script src="http://cdn.bootcss.com/jquery.form/3.51/jquery.form.js"></script>
     <script type="text/javascript">
-        $('.form_datetime').datetimepicker({
-            weekStart: 1,
-            todayBtn:  1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            forceParse: 0,
-            showMeridian: 1
-        });
         $(function () {
             var bar = $('.bar');
             var percent = $('.percent');
@@ -183,11 +124,13 @@
                         var obj = jQuery.parseJSON(data.data);
                         console.log(obj);
                         files.html(
+                            "<input  name = 'headimage' value='" + obj.uuid + "' type='hidden'/>"+
                             "<div class='input-group'><div class='input-group-btn'><button id='delete'  rel='"+obj.uuid+"' type='button' class='delimg btn btn-danger '>删除</button></div><!-- /btn-group --><input type='text' class='form-control' readonly value='" + obj.name +"("+obj.size +"k)'"+"></div>"
                         );
                         //显示上传后的图片
-                        var img = "/file?uuid="+obj.uuid+"&width=640&height=320";
+                        var img = obj.url;
                         showimg.html("<img src='"+img+"'>");
+
                     },
                     error:function(xhr){ //上传失败
                         btn.html("上传失败");

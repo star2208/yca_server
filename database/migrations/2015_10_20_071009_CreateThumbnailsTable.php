@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAuthorsTable extends Migration
+class CreateThumbnailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,12 @@ class CreateAuthorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('authors', function (Blueprint $table) {
+        Schema::create('thumbnails', function (Blueprint $table)
+        {
             $table->bigIncrements('id');
-            $table->string('name')->index();
-            $table->string('headImage');
-            $table->string('describe')->index();
-            $table->integer('statu')->unsigned()->default(1);
-            $table->softDeletes()->index();
+            $table->char('file_id', 36)->index();
+            $table->integer('width')->unsigned()->default(0)->index();
+            $table->integer('height')->unsigned()->default(0)->index();
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateAuthorsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('authors');
+        Schema::drop('thumbnails');
     }
 }

@@ -26,48 +26,7 @@
             </nav>
         </header>
         <!-- Left side column. contains the logo and sidebar -->
-        <aside class="main-sidebar">
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
-                <!-- /.search form -->
-                <!-- sidebar menu: : style can be found in sidebar.less -->
-                <ul class="sidebar-menu">
-                    <li class="treeview">
-                        <a href="/">
-                            <i class="fa fa-circle-o"></i><span>总览</span>
-                        </a>
-                    </li>
-                    <!--
-                    <li class="treeview">
-                        <a href="/review">
-                            <i class="fa fa-edit"></i> <span>简评</span>
-                        </a>
-                    </li>-->
-                    <li>
-                        <a href="/article">
-                            <i class="fa fa-book"></i><span>文章</span>
-                        </a>
-                    </li>
-                    <li class="active">
-                        <a href="/author">
-                            <i class="fa fa-edit"></i> <span>作者</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/author">
-                            <i class="fa fa-edit"></i> <span>作者</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/notification">
-                            <i class="fa fa-calendar"></i> <span>推送任务</span>
-                        </a>
-                    </li>
-                </ul>
-            </section>
-            <!-- /.sidebar -->
-        </aside>
-
+        @include('author.sidebar')
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -77,8 +36,8 @@
                     <small>APP控制台</small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="/article"><i class="fa fa-dashboard"></i>文章</a></li>
-                    <li class="active">创建文章</li>
+                    <li><a href="/author"><i class="fa fa-dashboard"></i>作者</a></li>
+                    <li class="active">创建作者</li>
                 </ol>
             </section>
 
@@ -91,7 +50,7 @@
                             <div class="box-header">
                                 <h3 class="box-title">作者信息</h3>
                             </div>
-                            <form role="form"  action="article/create" method="post" >
+                            <form role="form"  action="/author/create" method="post" >
                                 <div class="box-body">
                                     <div class="input-group">
                                         <span class="input-group-addon">姓名</span>
@@ -165,11 +124,13 @@
                         var obj = jQuery.parseJSON(data.data);
                         console.log(obj);
                         files.html(
+                            "<input  name = 'headimage' value='" + obj.uuid + "' type='hidden'/>"+
                             "<div class='input-group'><div class='input-group-btn'><button id='delete'  rel='"+obj.uuid+"' type='button' class='delimg btn btn-danger '>删除</button></div><!-- /btn-group --><input type='text' class='form-control' readonly value='" + obj.name +"("+obj.size +"k)'"+"></div>"
                         );
                         //显示上传后的图片
                         var img = obj.url;
                         showimg.html("<img src='"+img+"'>");
+
                     },
                     error:function(xhr){ //上传失败
                         btn.html("上传失败");

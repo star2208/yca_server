@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Author;
 class AuthorController extends Controller
 {
     public function __construct()
@@ -20,7 +20,8 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        return response()->view('author.index');
+        $authors = Author::all();
+        return response()->view('author.index',['authors' => $authors]);
     }
 
     /**
@@ -28,9 +29,14 @@ class AuthorController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $author = new Author();
+        $author -> name = $request->input("name");
+        $author -> headImage = $request->input("headimage");
+        $author -> describe = $request->input("describe");
+        $author -> save();
+        return  response()->view('author.index');
     }
 
     /**
@@ -63,7 +69,8 @@ class AuthorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $author = Author::findOrNew($id);
+        return  response()->view('author.edit',['author' => $author]);
     }
 
     /**
@@ -75,7 +82,7 @@ class AuthorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**

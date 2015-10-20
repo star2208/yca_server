@@ -10,7 +10,8 @@
         "phansys/getid3": "~2.0@beta",
         "itbdw/laravel-storage-qiniu": "^1.0",
         "ramsey/uuid": "^3.0",
-        "moontoast/math": "^1.1"
+        "moontoast/math": "^1.1",
+        "intervention/image": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

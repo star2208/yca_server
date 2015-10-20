@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
-//use Intervention\Image\Facades\Image;
+use Intervention\Image\Facades\Image;
 use GetId3\GetId3Core as GetId3;
 use Storage;
 use Ramsey\Uuid\Uuid;
@@ -43,26 +43,24 @@ class StorageController extends Controller
     {
         // 验证数据。
         $this->validate($request, [
-            'id' => [
+            'uuid' => [
                 'required',
-                'exists:user_files,id'
             ]
         ]);
 
         // 取得文件模型。
-        $file = UserFile::find($request->input('id'));
-        $storage = $file->storage;
+        $uuid = $request->input('uuid');
+        $file = File::find($uuid);
+        $extension = '.' . $file->format;
+        $filename = $uuid.$extension;
 
-        // 取得文件名与拓展名。
-        $filename = $file->filename;
-        $extension = '.' . $storage->format;
         $disposition = 'attachment';
         $headers = [
-            'Content-Type' => $storage->mime
+            'Content-Type' => $file->mime
         ];
 
         // 根据文件Mime处理额外操作。
-        switch ($storage->mime) {
+        switch ($file->mime) {
 
             // 图片。
             case 'image/jpeg':
@@ -77,13 +75,13 @@ class StorageController extends Controller
                 $height = $height > 0 ? ceil($height) : null;
 
                 // 如果是要取缩略图。
-                if ((! is_null($width) || ! is_null($height)) && ($storage->width != $width || $storage->height != $height)) {
+                if ((! is_null($width) || ! is_null($height)) && ($file->width != $width || $file->height != $height)) {
                     // 查找当前图片的缩略图列表，是否已经有此尺寸的图片。
                     if (is_null($width) && ! is_null($height)) {
-                        $width = ceil($storage->width / $storage->height * $height);
+                        $width = ceil($file->width / $file->height * $height);
                     }
                     if (is_null($height) && ! is_null($width)) {
-                        $height = ceil($storage->height / $storage->width * $width);
+                        $height = ceil($file->height / $file->width * $width);
                     }
                     $thumbnail = $storage->thumbnails()
                         ->where('width', $width)

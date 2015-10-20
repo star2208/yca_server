@@ -17,43 +17,7 @@
             </nav>
         </header>
         <!-- Left side column. contains the logo and sidebar -->
-        <aside class="main-sidebar">
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
-                <!-- /.search form -->
-                <!-- sidebar menu: : style can be found in sidebar.less -->
-                <ul class="sidebar-menu">
-                    <li class="treeview">
-                        <a href="/">
-                            <i class="fa fa-circle-o"></i><span>总览</span>
-                        </a>
-                    </li>
-                    <!--
-                    <li class="treeview">
-                        <a href="/review">
-                            <i class="fa fa-edit"></i> <span>简评</span>
-                        </a>
-                    </li>-->
-                    <li>
-                        <a href="/article">
-                            <i class="fa fa-book"></i><span>文章</span>
-                        </a>
-                    </li>
-                    <li class="active">
-                        <a href="/author">
-                            <i class="fa fa-edit"></i> <span>作者</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/notification">
-                            <i class="fa fa-calendar"></i> <span>推送任务</span>
-                        </a>
-                    </li>
-                </ul>
-            </section>
-            <!-- /.sidebar -->
-        </aside>
-
+        @include('author.sidebar')
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -86,20 +50,37 @@
                             </div><!-- /.box-header -->
                             <div class="box-body table-responsive no-padding">
                                 <table class="table table-hover">
+
                                     <tr>
                                         <th>ID</th>
                                         <th>名称</th>
-                                        <th>添加时间</th>
-                                        <th>状态</th>
                                         <th>描述</th>
+                                        <th>操作</th>
+                                        <th>上一修改时间</th>
                                     </tr>
+                                    <?php foreach ($authors as $author){?>
                                     <tr>
-                                        <td>183</td>
-                                        <td>John Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-success">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                        <td><?php echo($author->id );?></td>
+                                        <td><?php echo($author->name );?></td>
+                                        <td><?php echo($author->describe );?></td>
+                                        <td><a type="button" class="label label-primary" href="/author/edit/<?php echo($author->id );?>">编辑</a></td>
+                                        <!--
+                                        <td><?php/*
+                                            switch($author->statu)
+                                            {
+                                                case 0:
+                                                    break;
+                                                case 1:
+                                                    echo("<span class='label label-success'>启用</span>");
+                                                    break;
+                                                case 2:
+                                                    break;
+                                            }*/?>
+                                        </td>-->
+                                        <td><?php echo($author->updated_at );?></td>
                                     </tr>
+                                    <?php }?>
+                                    <!--
                                     <tr>
                                         <td>219</td>
                                         <td>Alexander Pierce</td>
@@ -111,7 +92,7 @@
                                         <td>657</td>
                                         <td>Bob Doe</td>
                                         <td>11-7-2014</td>
-                                        <td><span class="label label-primary">Approved</span></td>
+                                        <td><span class="label label-success">Approved</span></td>
                                         <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
                                     </tr>
                                     <tr>
@@ -120,7 +101,7 @@
                                         <td>11-7-2014</td>
                                         <td><span class="label label-danger">Denied</span></td>
                                         <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
+                                    </tr>-->
                                 </table>
                                 <!--
                                 <div class="box-footer clearfix">
