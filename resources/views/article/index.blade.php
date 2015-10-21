@@ -17,7 +17,7 @@
             </nav>
         </header>
         <!-- Left side column. contains the logo and sidebar -->
-        @include('author.sidebar')
+        @include('article.sidebar')
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->

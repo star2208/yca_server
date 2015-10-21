@@ -27,7 +27,7 @@
             </nav>
         </header>
         <!-- Left side column. contains the logo and sidebar -->
-        @include('author.sidebar')
+        @include('article.sidebar')
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -187,7 +187,7 @@
                         );
                         //显示上传后的图片
                         var img = "/file?uuid="+obj.uuid+"&width=640&height=320";
-                        showimg.html("<img src='"+img+"'>");
+                        showimg.html("<img src='"+img+"' style='max-width:100%'>");
                     },
                     error:function(xhr){ //上传失败
                         btn.html("上传失败");

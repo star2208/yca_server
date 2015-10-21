@@ -50,7 +50,7 @@
                             <div class="box-header">
                                 <h3 class="box-title">作者信息</h3>
                             </div>
-                            <form role="form"  action="/author/create" method="post" >
+                            <form role="form"  action="/author/update" method="post" >
                                 <div class="box-body">
                                     <div class="input-group">
                                         <span class="input-group-addon">姓名</span>
@@ -62,7 +62,6 @@
                                         <input name = "describe" type="text" class="form-control" placeholder="输入作者简介，例如：谈笑风生的长者" value="<?php echo($author->describe);?>">
                                     </div>
                                 </div><!-- /.box-body -->
-
                                 <div class="box-body">
                                     <div class="form-group">
                                             <input id="fileupload" type="file" name="file">
@@ -72,12 +71,17 @@
                                     <div class="progress" style="display: none;">
                                         <span class="bar"></span><span class="percent">0%</span >
                                     </div>
-                                    <div class="files"></div>
+                                    <div class="files">
+                                        <input  name = "headimage"  value="<?php echo($author->headImage);?>" type='hidden'/>
+                                    </div>
+                                    <div id="showimg" class="box-body product-img">
+                                        <img src="/file?uuid=<?php echo($author->headImage);?>&width=114&height=114" alt="Product Image" style="max-width: 320px">
+                                    </div>
                                 </div><!-- /.box-body -->
-                                <div id="showimg"></div>
                                 <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary">创建作者</button>
+                                    <button type="submit" class="btn btn-primary">保存</button>
                                 </div>
+                                <input  name = "id" value="<?php echo($author->id);?>" type='hidden'/>
                             </form>
                         </div><!-- /.box -->
                     </div><!--/.col (left) -->
@@ -128,9 +132,8 @@
                             "<div class='input-group'><div class='input-group-btn'><button id='delete'  rel='"+obj.uuid+"' type='button' class='delimg btn btn-danger '>删除</button></div><!-- /btn-group --><input type='text' class='form-control' readonly value='" + obj.name +"("+obj.size +"k)'"+"></div>"
                         );
                         //显示上传后的图片
-                        var img = obj.url;
-                        showimg.html("<img src='"+img+"'>");
-
+                        var img = "/file?uuid="+obj.uuid+"&width=114&height=114";
+                        showimg.html("<img src='"+img+"' style='max-width:100%'>");
                     },
                     error:function(xhr){ //上传失败
                         btn.html("上传失败");

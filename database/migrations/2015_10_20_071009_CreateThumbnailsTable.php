@@ -14,7 +14,7 @@ class CreateThumbnailsTable extends Migration
     {
         Schema::create('thumbnails', function (Blueprint $table)
         {
-            $table->bigIncrements('id');
+            $table->char('id', 36)->primary();
             $table->char('file_id', 36)->index();
             $table->integer('width')->unsigned()->default(0)->index();
             $table->integer('height')->unsigned()->default(0)->index();

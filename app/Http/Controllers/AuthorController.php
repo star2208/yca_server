@@ -36,7 +36,7 @@ class AuthorController extends Controller
         $author -> headImage = $request->input("headimage");
         $author -> describe = $request->input("describe");
         $author -> save();
-        return  response()->view('author.index');
+        return  redirect()->action('AuthorController@index');;
     }
 
     /**
@@ -80,9 +80,14 @@ class AuthorController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-
+        $author = Author::find($request->input("id"));
+        $author -> name = $request->input("name");
+        $author -> headImage = $request->input("headimage");
+        $author -> describe = $request->input("describe");
+        $author -> save();
+        return  redirect()->action('AuthorController@index');;
     }
 
     /**

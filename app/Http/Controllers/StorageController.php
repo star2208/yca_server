@@ -55,12 +55,8 @@ class StorageController extends Controller
         $extension = '.' . $file->format;
         $filename = $uuid.$extension;
 
-        $disposition = 'attachment';
-        $headers = [
-            'Content-Type' => $file->mime
-        ];
-
         // 根据文件Mime处理额外操作。
+
         switch ($file->mime) {
 
             // 图片。
@@ -74,7 +70,6 @@ class StorageController extends Controller
                 $height = $request->input('height', 0);
                 $width = $width > 0 ? ceil($width) : null;
                 $height = $height > 0 ? ceil($height) : null;
-
                 // 如果是要取缩略图。
                 if ((! is_null($width) || ! is_null($height)) && ($file->width != $width || $file->height != $height)) {
                     // 查找当前图片的缩略图列表，是否已经有此尺寸的图片。
@@ -92,29 +87,24 @@ class StorageController extends Controller
                     if (is_null($thumbnail)) {
 
                         $image = Image::make(Storage::disk('local')->get($filename));
-                        $image->fit($width, $height);
-                        $thumbnail_filename = Uuid::uuid1()->toString().'.'.$extension;
-                        Storage::disk('local')->put($thumbnail_filename, $image->stream());
-                        Storage::disk('qiniu')->put($thumbnail_filename, $image->stream());
-
+                        $image->resize($width, $height);
+                        $thumbnail_id = Uuid::uuid1()->toString();
+                        $filename = $thumbnail_id.$extension;
+                        Storage::disk('local')->put($filename, $image->stream());
+                        Storage::disk('qiniu')->put($filename, $image->stream());
 
                         // 保存图片信息到数据库。
                         $thumbnail = new Thumbnail();
+                        $thumbnail -> id = $thumbnail_id;
                         $thumbnail -> file_id = $uuid;
                         $thumbnail -> width = $width;
                         $thumbnail -> height = $height;
                         $thumbnail->save();
-                        $file->thumbnails()->attach(1);
+                        $file->thumbnails()->save($thumbnail);
                     }
-
-                    // 此次请求使用此缩略图。
-                    $storage = $thumbnail;
-                    // $filename .= "_{$storage->width}_{$storage->height}";
-                    $extension = $storage->format;
+                    $uuid = $thumbnail -> id;
                 }
-
-                $disposition = 'inline';
-                break;
+            break;
 
             // 视频。
             case 'video/x-ms-asf':
@@ -140,8 +130,6 @@ class StorageController extends Controller
             case 'video/x-ms-wmx':
             case 'video/x-ms-wvx':
             case 'video/quicktime':
-                unset($headers['Content-Type']);
-                $disposition = 'inline';
                 break;
 
             // 音频。
@@ -173,15 +161,9 @@ class StorageController extends Controller
             case 'audio/x-ms-wax':
             case 'audio/x-ms-wma':
             case 'audio/scpls':
-                $disposition = 'inline';
                 break;
         }
-
-        // 预先转换文件名到ASCII编码。
-        $filename = mb_convert_encoding($filename, 'ASCII', 'UTF-8');
-
-        // 生成指定Mime的数据响应。
-        return response()->download($this->storage_path . $storage->path, $filename, $headers, $request->input('download', 'false') == 'true' ? 'attachment' : $disposition);
+        return redirect(Storage::disk('qiniu')->getDriver()->getAdapter()->getPathPrefix().$uuid.$extension);
     }
 
     /**
@@ -216,7 +198,6 @@ class StorageController extends Controller
         $data = [
             'name' => $file->getClientOriginalName(),
             'size' => $info['filesize'],
-            'url' => $disk->getDriver()->downloadUrl($filename),
             'uuid' => $fileuuid,
         ];
 

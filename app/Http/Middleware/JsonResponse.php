@@ -5,6 +5,7 @@ use Closure;
 use Illuminate\Http\JsonResponse as HttpJsonResponse;
 use Illuminate\Contracts\Support\Arrayable;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Illuminate\Http\Response;
 use Carbon\Carbon;
 
@@ -29,6 +30,11 @@ class JsonResponse
 
 		// 忽略对二进制响应的处理。
 		if ($response instanceof BinaryFileResponse) {
+			return $response;
+		}
+
+		// 忽略对重定向响应的处理。
+		if ($response instanceof RedirectResponse) {
 			return $response;
 		}
 

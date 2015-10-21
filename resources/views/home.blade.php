@@ -39,6 +39,11 @@
                     </a>
                 </li>
                 <li>
+                    <a href="/column">
+                        <i class="fa fa-columns"></i> <span>栏目</span>
+                    </a>
+                </li>
+                <li>
                     <a href="/notification">
                         <i class="fa fa-calendar"></i> <span>推送任务</span>
                     </a>

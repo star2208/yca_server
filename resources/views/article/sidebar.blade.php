@@ -15,7 +15,7 @@
                     <i class="fa fa-book"></i><span>文章</span>
                 </a>
             </li>
-            <li class="active">
+            <li>
                 <a href="/author">
                     <i class="fa fa-male"></i> <span>作者</span>
                 </a>

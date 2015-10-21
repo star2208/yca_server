@@ -73,8 +73,8 @@
                                         <span class="bar"></span><span class="percent">0%</span >
                                     </div>
                                     <div class="files"></div>
+                                    <div id="showimg"></div>
                                 </div><!-- /.box-body -->
-                                <div id="showimg"></div>
                                 <div class="box-footer">
                                     <button type="submit" class="btn btn-primary">创建作者</button>
                                 </div>
@@ -128,9 +128,8 @@
                             "<div class='input-group'><div class='input-group-btn'><button id='delete'  rel='"+obj.uuid+"' type='button' class='delimg btn btn-danger '>删除</button></div><!-- /btn-group --><input type='text' class='form-control' readonly value='" + obj.name +"("+obj.size +"k)'"+"></div>"
                         );
                         //显示上传后的图片
-                        var img = obj.url;
-                        showimg.html("<img src='"+img+"'>");
-
+                        var img = "/file?uuid="+obj.uuid+"&width=114&height=114";
+                        showimg.html("<img src='"+img+"' style='max-width:100%'>");
                     },
                     error:function(xhr){ //上传失败
                         btn.html("上传失败");
