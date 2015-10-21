@@ -39,7 +39,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/column">
+                    <a href="/topic">
                         <i class="fa fa-columns"></i> <span>栏目</span>
                     </a>
                 </li>
