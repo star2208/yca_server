@@ -17,7 +17,7 @@ class CreateArticles extends Migration
             $table->string('title')->index();
             $table->morphs('author');
             $table->json('content');
-            $table->integer('type')->index();
+            $table->integer('topic_id')->index();
             $table->string('cover');
             $table->dateTime('publishTime')->index();
             $table->softDeletes()->index();

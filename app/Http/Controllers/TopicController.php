@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Author;
-class AuthorController extends Controller
+use App\Topic;
+
+class TopicController extends Controller
 {
     public function __construct()
     {
@@ -20,8 +21,8 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors = Author::all();
-        return response()->view('author.index',['authors' => $authors]);
+        $topics = Topic::all();
+        return response()->view('topic.index',['topics' => $topics]);
     }
 
     /**
@@ -31,12 +32,12 @@ class AuthorController extends Controller
      */
     public function create(Request $request)
     {
-        $author = new Author();
-        $author -> name = $request->input("name");
-        $author -> headImage = $request->input("headimage");
-        $author -> describe = $request->input("describe");
-        $author -> save();
-        return  redirect()->action('AuthorController@index');
+        $topic = new Topic();
+        $topic -> name = $request->input("name");
+        $topic -> color = base_convert (substr($request->input("color"),-6), 16,10 ) ;
+        $topic -> describe = $request->input("describe");
+        $topic -> save();
+        return  '';//redirect()->action('TopicController@index');
     }
 
     /**
@@ -58,7 +59,7 @@ class AuthorController extends Controller
      */
     public function show()
     {
-        return response()->view('author.create');
+        return response()->view('topic.create');
     }
 
     /**
@@ -69,8 +70,7 @@ class AuthorController extends Controller
      */
     public function edit($id)
     {
-        $author = Author::findOrNew($id);
-        return  response()->view('author.edit',['author' => $author]);
+        //
     }
 
     /**
@@ -80,14 +80,9 @@ class AuthorController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $author = Author::find($request->input("id"));
-        $author -> name = $request->input("name");
-        $author -> headImage = $request->input("headimage");
-        $author -> describe = $request->input("describe");
-        $author -> save();
-        return  redirect()->action('AuthorController@index');;
+        //
     }
 
     /**

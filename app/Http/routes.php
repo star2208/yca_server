@@ -14,9 +14,14 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::get('author', 'AuthorController@index');
 Route::get('author/create', 'AuthorController@show');
 Route::post('author/create', 'AuthorController@create');
-Route::delete('author/delete','AuthorController@destroy');
 Route::get('author/edit/{id}', 'AuthorController@edit');
 Route::post('author/update', 'AuthorController@update');
+//栏目
+Route::get('topic', 'TopicController@index');
+Route::get('topic/create', 'TopicController@show');
+Route::post('topic/create', 'TopicController@create');
+Route::get('topic/edit/{id}', 'TopicController@edit');
+Route::post('topic/update', 'TopicController@update');
 //文章
 Route::get('article', 'ArticleController@index');
 Route::get('article/create', 'ArticleController@show');

@@ -16,7 +16,7 @@ class CreateTopics extends Migration
             $table->bigIncrements('id');
             $table->string('name')->index();
             $table->string('describe')->index();
-            $table->binary('color')->unsigned()->default(0);
+            $table->bigInteger('color')->unsigned()->default(0);
             $table->softDeletes()->index();
             $table->timestamps();
         });

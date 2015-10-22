@@ -33,7 +33,7 @@
     <!-- Slimscroll -->
     <script src="http://cdn.bootcss.com/jQuery-slimScroll/1.3.6/jquery.slimscroll.min.js" type="text/javascript"></script>
     <!-- FastClick -->
-    <script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+    <script src="http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
     <!-- AdminLTE App -->
     <script src="http://static.youngchina.review/dist/js/app.min.js" type="text/javascript"></script>
 @yield('footer')
