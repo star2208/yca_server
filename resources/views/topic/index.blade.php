@@ -63,7 +63,7 @@
                                         <td><?php echo($topic->id );?></td>
                                         <td><?php echo($topic->name );?></td>
                                         <td><?php echo($topic->describe );?></td>
-                                        <td><a type="button" class="label label-primary" href="/author/edit/<?php echo($topic->id );?>">编辑</a></td>
+                                        <td><a type="button" class="label label-primary" href="/topic/edit/<?php echo($topic->id );?>">编辑</a><a type="button" class="label label-primary" href="/topic/delete/<?php echo($topic->id );?>">删除</a></td>
                                         <td><?php echo($topic->updated_at );?></td>
                                     </tr>
                                     <?php }?>

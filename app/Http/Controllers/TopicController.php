@@ -37,7 +37,7 @@ class TopicController extends Controller
         $topic -> color = base_convert (substr($request->input("color"),-6), 16,10 ) ;
         $topic -> describe = $request->input("describe");
         $topic -> save();
-        return  '';//redirect()->action('TopicController@index');
+        return redirect()->action('TopicController@index');
     }
 
     /**
@@ -70,7 +70,10 @@ class TopicController extends Controller
      */
     public function edit($id)
     {
-        //
+        $topic = Topic::findOrNew($id);
+        $topic -> color = '#'.base_convert ($topic->color,10,16 );
+        #echo $topic -> color;
+        return  response()->view('topic.edit',['topic' => $topic]);
     }
 
     /**
@@ -80,9 +83,14 @@ class TopicController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $topic = Topic::find($request->input("id"));
+        $topic -> name = $request->input("name");
+        $topic -> color = base_convert (substr($request->input("color"),-6), 16,10 ) ;
+        $topic -> describe = $request->input("describe");
+        $topic -> save();
+        return  redirect()->action('TopicController@index');;
     }
 
     /**
