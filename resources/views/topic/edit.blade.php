@@ -44,6 +44,16 @@
                             </div>
                             <form role="form"  action="/topic/update" method="post" >
                                 <div class="box-body">
+                                    @if (count($errors) > 0)
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        <br>
+                                    @endif
                                     <div class="input-group">
                                         <span class="input-group-addon">题目</span>
                                         <input name = "name" type="text" class="form-control" placeholder="输入栏目题目" value="<?php echo($topic->name);?>">

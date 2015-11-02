@@ -11,7 +11,8 @@
         "itbdw/laravel-storage-qiniu": "^1.0",
         "ramsey/uuid": "^3.0",
         "moontoast/math": "^1.1",
-        "intervention/image": "^2.3"
+        "intervention/image": "^2.3",
+        "jpush/jpush": "^3.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

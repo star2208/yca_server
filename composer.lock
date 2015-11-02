@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b2c029404dcb62b04063683bed90d884",
-    "content-hash": "5f90f2e6a9e864f85a879db6ba06dfaa",
+    "hash": "6ca413e0436a3895906313126f16aacb",
+    "content-hash": "7585a1d0c0a175685db7edc282e48fc5",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -541,6 +541,70 @@
             "time": "2015-03-11 20:06:43"
         },
         {
+            "name": "jpush/jpush",
+            "version": "v3.2.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jpush/jpush-api-php-client.git",
+                "reference": "b2fc3672bab2554d81e79e9fe242226016dfbfae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "http://packagist.phpcomposer.com/files/jpush/jpush-api-php-client/b2fc3672bab2554d81e79e9fe242226016dfbfae.zip",
+                "reference": "b2fc3672bab2554d81e79e9fe242226016dfbfae",
+                "shasum": ""
+            },
+            "require": {
+                "monolog/monolog": "1.*",
+                "nategood/httpful": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "jpush": "src/"
+                },
+                "files": [
+                    "src/JPush/Model/Audience.php",
+                    "src/JPush/Model/Message.php",
+                    "src/JPush/Model/Notification.php",
+                    "src/JPush/Model/Options.php",
+                    "src/JPush/Model/Platform.php",
+                    "src/JPush/Model/PushPayload.php",
+                    "src/JPush/Model/PushResponse.php",
+                    "src/JPush/Model/ReportResponse.php",
+                    "src/JPush/Model/MessageResponse.php",
+                    "src/JPush/Model/MessageAndroid.php",
+                    "src/JPush/Model/MessageIOS.php",
+                    "src/JPush/Model/MessageItem.php",
+                    "src/JPush/Model/UserResponse.php",
+                    "src/JPush/Model/DeviceResponse.php",
+                    "src/JPush/Model/Report.php",
+                    "src/JPush/JPushClient.php",
+                    "src/JPush/JPushLog.php",
+                    "src/JPush/Exception/APIConnectionException.php",
+                    "src/JPush/Exception/APIRequestException.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache"
+            ],
+            "authors": [
+                {
+                    "name": "JPush",
+                    "email": "support@jpush.cn",
+                    "homepage": "https://www.jpush.cn/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "JPush API PHP Client",
+            "homepage": "http://docs.jpush.cn/display/dev/Push-API-v3",
+            "time": "2015-09-08 06:22:40"
+        },
+        {
             "name": "laravel/framework",
             "version": "v5.1.20",
             "source": {
@@ -909,6 +973,56 @@
                 "schedule"
             ],
             "time": "2015-01-11 23:07:46"
+        },
+        {
+            "name": "nategood/httpful",
+            "version": "0.2.20",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nategood/httpful.git",
+                "reference": "c1cd4d46a4b281229032cf39d4dd852f9887c0f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "http://packagist.phpcomposer.com/files/nategood/httpful/c1cd4d46a4b281229032cf39d4dd852f9887c0f6.zip",
+                "reference": "c1cd4d46a4b281229032cf39d4dd852f9887c0f6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Httpful": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nate Good",
+                    "email": "me@nategood.com",
+                    "homepage": "http://nategood.com"
+                }
+            ],
+            "description": "A Readable, Chainable, REST friendly, PHP HTTP Client",
+            "homepage": "http://github.com/nategood/httpful",
+            "keywords": [
+                "api",
+                "curl",
+                "http",
+                "requests",
+                "rest",
+                "restful"
+            ],
+            "time": "2015-10-26 16:11:30"
         },
         {
             "name": "nesbot/carbon",

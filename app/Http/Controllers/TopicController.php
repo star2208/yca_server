@@ -58,7 +58,7 @@ class TopicController extends Controller
     public function create(Request $request)
     {
         if ($this->validator->fails()) {
-            return redirect()->back()->withErrors($this->validato->errors());
+            return redirect()->back()->withErrors($this->validator->errors());
         }
         $topic = new Topic();
         $topic -> name = $request->input("name");
@@ -113,6 +113,9 @@ class TopicController extends Controller
      */
     public function update(Request $request)
     {
+        if ($this->validator->fails()) {
+            return redirect()->back()->withErrors($this->validator->errors());
+        }
         $topic = Topic::find($request->input("id"));
         $topic -> name = $request->input("name");
         $topic -> color = base_convert (substr($request->input("color"),-6), 16,10 ) ;
