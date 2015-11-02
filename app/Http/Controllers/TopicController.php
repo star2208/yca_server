@@ -6,13 +6,38 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
 use App\Topic;
 
 class TopicController extends Controller
 {
+    private $validator;
     public function __construct()
     {
         $this->middleware('auth');
+        $rules = array(
+            'name' => 'required',
+            'describe' => 'required',
+            'color' => 'required',
+        );
+        $message = array(
+            "required"             => ":attribute 不能为空",
+            "between"      => ":attribute 长度必须在 :min 和 :max 之间"
+        );
+
+        $attributes = array(
+            "name" => '栏目名称',
+            'describe' => '栏目简介',
+            'color' => '栏目背景颜色',
+        );
+
+        $this->validator = Validator::make(
+            Input::all(),
+            $rules,
+            $message,
+            $attributes
+        );
     }
     /**
      * Display a listing of the resource.
@@ -32,6 +57,9 @@ class TopicController extends Controller
      */
     public function create(Request $request)
     {
+        if ($this->validator->fails()) {
+            return redirect()->back()->withErrors($this->validato->errors());
+        }
         $topic = new Topic();
         $topic -> name = $request->input("name");
         $topic -> color = base_convert (substr($request->input("color"),-6), 16,10 ) ;
@@ -90,7 +118,7 @@ class TopicController extends Controller
         $topic -> color = base_convert (substr($request->input("color"),-6), 16,10 ) ;
         $topic -> describe = $request->input("describe");
         $topic -> save();
-        return  redirect()->action('TopicController@index');;
+        return  redirect()->action('TopicController@index');
     }
 
     /**
@@ -99,8 +127,10 @@ class TopicController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $topic = Topic::find($id);
+        $topic->delete();
+        return  redirect()->action('TopicController@index');
     }
 }
