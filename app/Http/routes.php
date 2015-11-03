@@ -27,6 +27,7 @@ Route::post('topic/restore/{id}', 'TopicController@restore');
 //文章
 Route::get('article', 'ArticleController@index');
 Route::get('article/create', 'ArticleController@show');
+Route::post('article/create', 'ArticleController@create');
 //文件
 Route::post('/file', 'StorageController@postFile');
 Route::get('/file', 'StorageController@getFile');

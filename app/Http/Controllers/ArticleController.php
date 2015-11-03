@@ -6,12 +6,38 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
 
 class ArticleController extends Controller
 {
+    private $validator;
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('auth');
+        $rules = array(
+            'title' => 'required',
+            'author' => 'required',
+            'publishTime' => 'required',
+        );
+        $message = array(
+            "required"             => ":attribute 不能为空",
+            "between"      => ":attribute 长度必须在 :min 和 :max 之间"
+        );
+
+        $attributes = array(
+            "name" => '栏目名称',
+            'describe' => '栏目简介',
+            'color' => '栏目背景颜色',
+        );
+
+        $this->validator = Validator::make(
+            Input::all(),
+            $rules,
+            $message,
+            $attributes
+        );
     }
     /**
      * Display a listing of the resource.
@@ -28,7 +54,7 @@ class ArticleController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create(Request $request)
     {
 
     }

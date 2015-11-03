@@ -46,7 +46,7 @@
             <section class="content">
                 <div class="row">
                     <!-- left column -->
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="box box-success">
                             <div class="box-header">
                                 <h3 class="box-title">基础信息</h3>
@@ -72,13 +72,14 @@
                                     <div class="form-group">
                                         <div class="input-group">
                                             <span class="input-group-addon">发布时间</span>
-                                            <input name = "" size="16" type="text" value="2012-06-15 14:45" readonly class="form_datetime form-control">
+                                            <input name = "publishTime" size="16" type="text" value="2012-06-15 14:45" readonly class="form_datetime form-control">
                                         </div><!-- /.input group -->
                                     </div>
                                 </div><!-- /.box-body -->
                                 <div class="box-footer">
                                     <button type="submit" class="btn btn-primary">创建文章</button>
                                 </div>
+                                <input id ="pic_uuid" type="hidden" name="cover" value="">
                             </form>
                         </div>
                         <!-- general form elements -->
@@ -105,6 +106,7 @@
                                     <div id="showimg"></div>
                                 </div>
                         </div><!-- /.box -->
+                        <!--
                         <div class="box box-danger">
                             <div class="box-header">
                                 <h3 class="box-title">添加文章内容</h3>
@@ -116,19 +118,23 @@
                                 <button type="submit" class="btn btn-primary small.margin">一段正文</button>
                             </div>
                         </div>
+                        -->
                     </div><!--/.col (left) -->
                     <!-- right column -->
+
+                    <!--
                     <div class="col-md-6">
-                        <!-- general form elements disabled -->
                         <div class="box box-warning">
                             <div class="box-header">
                                 <h3 class="box-title">预览</h3>
-                            </div><!-- /.box-header -->
+                            </div>
                             <div class="box-body">
+                            </div>
+                        </div>
+                    </div>
+                    -->
 
-                            </div><!-- /.box-body -->
-                        </div><!-- /.box -->
-                    </div><!--/.col (right) -->
+
                 </div>   <!-- /.row -->
             </section><!-- /.content -->
         </div><!-- /.content-wrapper -->
@@ -154,6 +160,7 @@
             showMeridian: 1
         });
         $(function () {
+            var pic_uuid = $('#pic_uuid');
             var bar = $('.bar');
             var percent = $('.percent');
             var showimg = $('#showimg');
@@ -188,6 +195,7 @@
                         //显示上传后的图片
                         var img = "/file?uuid="+obj.uuid+"&width=640&height=320";
                         showimg.html("<img src='"+img+"' style='max-width:100%'>");
+                        pic_uuid.val(obj.uuid);
                     },
                     error:function(xhr){ //上传失败
                         btn.html("上传失败");
