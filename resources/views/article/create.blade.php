@@ -51,8 +51,18 @@
                             <div class="box-header">
                                 <h3 class="box-title">基础信息</h3>
                             </div>
-                            <form role="form"  action="article/create" method="post" >
+                            <form role="form"  action="/article/create" method="post" >
                                 <div class="box-body">
+                                    @if (count($errors) > 0)
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        <br>
+                                    @endif
                                     <div class="input-group">
                                         <span class="input-group-addon">标题</span>
                                         <input name = "title" type="text" class="form-control" placeholder="输入标题内容">

@@ -51,38 +51,43 @@
                                 <table class="table table-hover">
                                     <tr>
                                         <th>ID</th>
-                                        <th>User</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th>Reason</th>
+                                        <th>标题</th>
+                                        <th>作者</th>
+                                        <th>发布日期</th>
+                                        <th>状态</th>
+                                        <th>所属栏目</th>
                                     </tr>
                                     <tr>
                                         <td>183</td>
+                                        <td>共产党宣言</td>
                                         <td>John Doe</td>
                                         <td>11-7-2014</td>
                                         <td><span class="label label-success">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                        <td>简评</td>
                                     </tr>
                                     <tr>
                                         <td>219</td>
+                                        <td>共产党宣言</td>
                                         <td>Alexander Pierce</td>
                                         <td>11-7-2014</td>
                                         <td><span class="label label-warning">Pending</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                        <td>语录</td>
                                     </tr>
                                     <tr>
                                         <td>657</td>
+                                        <td>共产党宣言</td>
                                         <td>Bob Doe</td>
                                         <td>11-7-2014</td>
                                         <td><span class="label label-primary">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                        <td>史海沉钩</td>
                                     </tr>
                                     <tr>
                                         <td>175</td>
+                                        <td>共产党宣言</td>
                                         <td>Mike Doe</td>
                                         <td>11-7-2014</td>
                                         <td><span class="label label-danger">Denied</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                        <td>国际观察</td>
                                     </tr>
                                 </table>
                                 <div class="box-footer">

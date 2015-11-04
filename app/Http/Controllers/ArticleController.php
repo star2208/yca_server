@@ -20,16 +20,17 @@ class ArticleController extends Controller
             'title' => 'required',
             'author' => 'required',
             'publishTime' => 'required',
+            'cover' => 'required',
         );
         $message = array(
-            "required"             => ":attribute 不能为空",
-            "between"      => ":attribute 长度必须在 :min 和 :max 之间"
+            "required" => ":attribute 不能为空",
         );
 
         $attributes = array(
-            "name" => '栏目名称',
-            'describe' => '栏目简介',
-            'color' => '栏目背景颜色',
+            "title" => '题目',
+            'author' => '作者',
+            'publishTime' => '发布时间',
+            'cover' => '封面',
         );
 
         $this->validator = Validator::make(
@@ -56,7 +57,10 @@ class ArticleController extends Controller
      */
     public function create(Request $request)
     {
-
+        if ($this->validator->fails()) {
+            return redirect()->back()->withErrors($this->validator->errors());
+        }
+        return response()->view('article.index');
     }
 
     /**
