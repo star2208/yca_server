@@ -51,7 +51,6 @@
                             <div class="box-header">
                                 <h3 class="box-title">基础信息</h3>
                             </div>
-                            <form role="form"  action="/article/create" method="post" >
                                 <div class="box-body">
                                     @if (count($errors) > 0)
                                         <div class="alert alert-danger">
@@ -65,54 +64,34 @@
                                     @endif
                                     <div class="input-group">
                                         <span class="input-group-addon">标题</span>
-                                        <input name = "title" type="text" class="form-control" placeholder="输入标题内容">
+                                        <input name = "title" type="text" class="form-control" placeholder="输入标题内容" readonly value="<?php echo($article->title);?>">
                                     </div>
                                     <br>
                                     <div class="input-group">
                                         <span class="input-group-addon">栏目</span>
-
+                                        <input name = "title" type="text" class="form-control" placeholder="输入标题内容" readonly value="<?php echo($article->topic->name);?>">
                                     </div>
                                     <br>
                                     <div class="input-group">
                                         <span class="input-group-addon">作者</span>
+                                        <input name = "title" type="text" class="form-control" placeholder="输入标题内容" readonly value="<?php echo($article->author->name);?>">
 
                                     </div>
                                     <br>
                                     <div class="form-group">
                                         <div class="input-group">
                                             <span class="input-group-addon">发布时间</span>
-                                            <input name = "publishTime" size="16" type="text" value="" readonly class="form_datetime form-control">
+                                            <input name = "publishTime" size="16" type="text"  class="form_datetime form-control"  readonly value="<?php echo($article->publishTime);?>">
                                         </div><!-- /.input group -->
                                     </div>
                                 </div><!-- /.box-body -->
-                                <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary">创建文章</button>
-                                </div>
-                                <input id ="pic_uuid" type="hidden" name="cover" value="">
-                            </form>
                         </div>
-                        <!-- general form elements -->
                         <div class="box box-primary">
                             <div class="box-header">
                                 <h3 class="box-title">封面</h3>
-                            </div><!-- /.box-header -->
-                            <!-- form start -->
-                            <!--
-                            <form role="form"  method="POST" action="/file" enctype="multipart/form-data">
-                            -->
+                            </div>
                             <div class="box-body">
-                                <div class="form-group">
-                                    <input id="fileupload" type="file" name="file">
-                                    <p class="help-block">封面图片，640*320像素，且经过压缩处理。由于图片服务器可能被随时干掉，编辑请保留所有图片存档以便恢复。</p>
-                                </div>
-
-                                <div class="progress" style="display: none;">
-                                    <span class="bar"></span><span class="percent">0%</span >
-                                </div>
-                                <div class="files"></div>
-                            </div><!-- /.box-body -->
-                            <div class="box-footer">
-                                <div id="showimg"></div>
+                                <img src="/file?uuid=<?php echo($article->cover);?>&width=640&height=320" style='max-width:100%'>
                             </div>
                         </div><!-- /.box -->
 
