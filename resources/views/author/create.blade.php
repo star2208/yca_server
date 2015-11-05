@@ -52,14 +52,24 @@
                             </div>
                             <form role="form"  action="/author/create" method="post" >
                                 <div class="box-body">
+                                    @if (count($errors) > 0)
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        <br>
+                                    @endif
                                     <div class="input-group">
                                         <span class="input-group-addon">姓名</span>
-                                        <input name = "name" type="text" class="form-control" placeholder="输入作者姓名">
+                                        <input name = "author_name" type="text" class="form-control" placeholder="输入作者姓名">
                                     </div>
                                     <br>
                                     <div class="input-group">
                                         <span class="input-group-addon">简介</span>
-                                        <input name = "describe" type="text" class="form-control" placeholder="输入作者简介，例如：谈笑风生的长者">
+                                        <input name = "author_describe" type="text" class="form-control" placeholder="输入作者简介，例如：谈笑风生的长者">
                                     </div>
                                 </div><!-- /.box-body -->
 

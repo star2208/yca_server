@@ -6,12 +6,37 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
 use App\Author;
 class AuthorController extends Controller
 {
+    private $validator;
     public function __construct()
     {
         $this->middleware('auth');
+        $rules = array(
+            'author_name' => 'required',
+            'author_describe' => 'required',
+            'headimage' => 'required',
+        );
+        $message = array(
+            "required"             => ":attribute 不能为空",
+            "between"      => ":attribute 长度必须在 :min 和 :max 之间"
+        );
+
+        $attributes = array(
+            "author_name" => '姓名',
+            'author_describe' => '作者简介',
+            'headimage' => '作者头像',
+        );
+
+        $this->validator = Validator::make(
+            Input::all(),
+            $rules,
+            $message,
+            $attributes
+        );
     }
     /**
      * Display a listing of the resource.
@@ -31,10 +56,13 @@ class AuthorController extends Controller
      */
     public function create(Request $request)
     {
+        if ($this->validator->fails()) {
+            return redirect()->back()->withErrors($this->validator->errors());
+        }
         $author = new Author();
-        $author -> name = $request->input("name");
+        $author -> name = $request->input("author_name");
         $author -> headImage = $request->input("headimage");
-        $author -> describe = $request->input("describe");
+        $author -> describe = $request->input("author_describe");
         $author -> save();
         return  redirect()->action('AuthorController@index');
     }
@@ -87,7 +115,7 @@ class AuthorController extends Controller
         $author -> headImage = $request->input("headimage");
         $author -> describe = $request->input("describe");
         $author -> save();
-        return  redirect()->action('AuthorController@index');;
+        return  redirect()->action('AuthorController@index');
     }
 
     /**

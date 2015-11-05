@@ -144,9 +144,9 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\YCAProvider::class,
         itbdw\QiniuStorage\QiniuFilesystemServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-
     ],
 
     /*

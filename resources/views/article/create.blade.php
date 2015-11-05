@@ -69,20 +69,29 @@
                                     </div>
                                     <br>
                                     <div class="input-group">
+                                        <span class="input-group-addon">栏目</span>
+                                        <select class="form-control" name="topic" >
+                                            <option value = ""></option>
+                                            <?php foreach ($topics as $topic){?>
+                                                <option value = "<?php echo($topic->id );?>"><?php echo($topic->name );?></option>
+                                            <?php }?>
+                                        </select>
+                                    </div>
+                                    <br>
+                                    <div class="input-group">
                                         <span class="input-group-addon">作者</span>
                                         <select class="form-control" name="author" >
-                                            <option>YCA1</option>
-                                            <option>option 2</option>
-                                            <option>option 3</option>
-                                            <option>option 4</option>
-                                            <option>option 5</option>
+                                            <option value = ""></option>
+                                            <?php foreach ($authors as $author){?>
+                                            <option value = "<?php echo($author->id );?>"><?php echo($author->name );?></option>
+                                            <?php }?>
                                         </select>
                                     </div>
                                     <br>
                                     <div class="form-group">
                                         <div class="input-group">
                                             <span class="input-group-addon">发布时间</span>
-                                            <input name = "publishTime" size="16" type="text" value="2012-06-15 14:45" readonly class="form_datetime form-control">
+                                            <input name = "publishTime" size="16" type="text" value="" readonly class="form_datetime form-control">
                                         </div><!-- /.input group -->
                                     </div>
                                 </div><!-- /.box-body -->

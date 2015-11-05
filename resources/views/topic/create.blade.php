@@ -67,7 +67,7 @@
                                     <div class="form-group">
                                         <div class="input-group my-colorpicker colorpicker-element">
                                             <span class="input-group-addon">背景颜色</span>
-                                            <input name="color" type="text" class="form-control">
+                                            <input name="color" type="text" class="form-control" readonly>
                                             <div class="input-group-addon">
                                                 <i style="background-color: rgb(0, 0, 0);"></i>
                                             </div>

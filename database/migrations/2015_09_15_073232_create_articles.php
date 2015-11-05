@@ -16,8 +16,8 @@ class CreateArticles extends Migration
             $table->bigIncrements('id');
             $table->string('title')->index();
             $table->morphs('author');
-            $table->json('content');
-            $table->integer('topic_id')->index();
+            $table->json('content')->nullable();
+            $table->morphs('topic');
             $table->string('cover');
             $table->dateTime('publishTime')->index();
             $table->softDeletes()->index();
@@ -35,4 +35,3 @@ class CreateArticles extends Migration
         Schema::drop('articles');
     }
 }
- 

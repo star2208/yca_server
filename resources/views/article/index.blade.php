@@ -40,10 +40,12 @@
                                 <h3 class="box-title">文章列表</h3>
                                 <div class="box-tools">
                                     <div class="input-group">
+                                        <!--
                                         <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
                                         <div class="input-group-btn">
                                             <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
                                         </div>
+                                        -->
                                     </div>
                                 </div>
                             </div><!-- /.box-header -->
@@ -52,53 +54,87 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>标题</th>
+                                        <th>栏目</th>
                                         <th>作者</th>
                                         <th>发布日期</th>
                                         <th>状态</th>
-                                        <th>所属栏目</th>
+                                        <th>操作</th>
                                     </tr>
+                                    <?php foreach ($articles as $article){?>
+                                    <tr>
+                                        <td><?php echo($article->id );?></td>
+                                        <td><?php echo($article->title );?></td>
+                                        <td><?php echo($article->topic->name );?></td>
+                                        <td><?php echo($article->author->name );?></td>
+                                        <td><?php echo($article->publishTime );?></td>
+                                        <td><?php
+                                                if ($article->publishTime < $nowtime)
+                                                {
+                                                    echo("<span class='label label-success'>已发布</span>");
+                                                }
+                                                else
+                                                {
+                                                    echo("<span class='label label-warning'>等待发布</span>");
+                                                }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <a type="button" class="label label-primary" href="/article/edit/main/<?php echo($article->id );?>">编辑基础信息</a>
+                                            <a type="button" class="label label-primary" href="/article/edit/content/<?php echo($article->id );?>">编辑内容</a>
+                                            <form method="post" action="/article/delete/<?php echo($article->id );?>" style="margin:0px;display: inline">
+                                                <a type="submit" class="label label-primary">删除</a>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <?php }?>
+                                    <!--
                                     <tr>
                                         <td>183</td>
+                                        <td>简评</td>
                                         <td>共产党宣言</td>
                                         <td>John Doe</td>
                                         <td>11-7-2014</td>
-                                        <td><span class="label label-success">Approved</span></td>
-                                        <td>简评</td>
+                                        <td><span class="label label-success">已发布</span></td>
                                     </tr>
                                     <tr>
                                         <td>219</td>
                                         <td>共产党宣言</td>
+                                        <td>语录</td>
                                         <td>Alexander Pierce</td>
                                         <td>11-7-2014</td>
-                                        <td><span class="label label-warning">Pending</span></td>
-                                        <td>语录</td>
+                                        <td><span class="label label-warning">等待发布</span></td>
+
                                     </tr>
                                     <tr>
                                         <td>657</td>
                                         <td>共产党宣言</td>
                                         <td>Bob Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-primary">Approved</span></td>
                                         <td>史海沉钩</td>
+                                        <td>11-7-2014</td>
+                                        <td><span class="label label-primary">待审核</span></td>
+
                                     </tr>
                                     <tr>
                                         <td>175</td>
                                         <td>共产党宣言</td>
+                                        <td>国际观察</td>
                                         <td>Mike Doe</td>
                                         <td>11-7-2014</td>
-                                        <td><span class="label label-danger">Denied</span></td>
-                                        <td>国际观察</td>
-                                    </tr>
+                                        <td><span class="label label-danger">未添加内容</span></td>
+
+                                    </tr>-->
                                 </table>
                                 <div class="box-footer">
                                     <button class="btn btn-default" onclick="window.location.href='/article/create'"><i class="fa fa-plus"></i>添加文章</button>
+                                    {!! $articles->render() !!}
+                                    <!--
                                     <ul class="pagination pagination-sm no-margin pull-right">
                                         <li><a href="#">«</a></li>
                                         <li><a href="#">1</a></li>
                                         <li><a href="#">2</a></li>
                                         <li><a href="#">3</a></li>
                                         <li><a href="#">»</a></li>
-                                    </ul>
+                                    </ul>-->
                                 </div>
                             </div><!-- /.box-body -->
                         </div><!-- /.box -->
