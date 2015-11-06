@@ -109,4 +109,25 @@ class ArticleController extends Controller
     {
         //
     }
+
+    public function delete($id)
+    {
+        return response()->json($id);
+    }
+    public function content_add_big(Request $request)
+    {
+        return response()->json($request->input("big_title"));
+    }
+    public function content_add_small(Request $request)
+    {
+        return response()->json($request->input("small_title"));
+    }
+    public function content_add_text(Request $request)
+    {
+        return response()->json($request->input("text"));
+    }
+    public function content_add_pic(Request $request)
+    {
+        return response()->json($request->input("pic_id"));
+    }
 }

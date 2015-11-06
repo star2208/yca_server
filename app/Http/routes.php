@@ -31,6 +31,11 @@ Route::post('article/create', 'ArticleController@create');
 Route::get('article/edit/main/{id}', 'ArticleController@edit_main');
 Route::get('article/edit/content/{id}', 'ArticleController@edit_content');
 Route::post('article/delete/{id}', 'ArticleController@destroy');
+Route::post('article/content/delete/{id}', 'ArticleController@delete');
+Route::post('article/content/add/big', 'ArticleController@content_add_big');
+Route::post('article/content/add/small', 'ArticleController@content_add_small');
+Route::post('article/content/add/text', 'ArticleController@content_add_text');
+Route::post('article/content/add/pic', 'ArticleController@content_add_pic');
 //文件
 Route::post('/file', 'StorageController@postFile');
 Route::get('/file', 'StorageController@getFile');
