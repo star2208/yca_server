@@ -81,9 +81,7 @@
                                         <td>
                                             <a type="button" class="label label-primary" href="/article/edit/main/<?php echo($article->id );?>">编辑基础信息</a>
                                             <a type="button" class="label label-primary" href="/article/edit/content/<?php echo($article->id );?>">编辑内容</a>
-                                            <form method="post" action="/article/delete/<?php echo($article->id );?>" style="margin:0px;display: inline">
-                                                <a type="submit" class="label label-primary">删除</a>
-                                            </form>
+                                            <a type="button" class="label label-primary" href="/article/delete/<?php echo($article->id );?>">删除</a>
                                         </td>
                                     </tr>
                                     <?php }?>

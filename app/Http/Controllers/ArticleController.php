@@ -87,7 +87,10 @@ class ArticleController extends Controller
 
     public function edit_main($id)
     {
-        //
+        $article = Article::find($id);
+        $topics = Topic::all();
+        $authors = Author::all();
+        return response()->view('article.editmain',['article' => $article,'topics' => $topics,'authors' => $authors]);
     }
 
     public function edit_content($id)
@@ -96,38 +99,105 @@ class ArticleController extends Controller
         return response()->view('article.editcontent',['article' => $article]);
     }
 
-    public function update_main(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        if ($this->validator->fails()) {
+            return redirect()->back()->withErrors($this->validator->errors());
+        }
+        $topic = Topic::find($request->input("topic"));
+        $author = Author::find($request->input("author"));
+        $article = Article::find($request->input("id"));
+        $article -> title = $request->input("title");
+        $article -> cover = $request->input("cover");
+        $article -> author() -> associate($author);
+        $article -> topic() -> associate($topic);
+        $article -> publishTime = Carbon::createFromFormat('Y-m-d H:i', trim($request->input("publishTime")));
+        $article->save();
+        return redirect()->action('ArticleController@index');
     }
 
-    public function update_content(Request $request, $id)
-    {
-        //
-    }
     public function destroy($id)
     {
-        //
+        $article = Article::find($id);
+        $article->delete();
+        return  redirect()->action('ArticleController@index');
     }
 
     public function delete($id)
     {
-        return response()->json($id);
+        $article = Article::find($id);
+        $date = $article -> content;
+        array_pop($date['content']);
+        $article -> content = $date;
+        $article -> save();
+        return response()->json($date);
     }
     public function content_add_big(Request $request)
     {
-        return response()->json($request->input("big_title"));
+        $id = $request->input("id");
+        $big_title = $request->input("big_title");
+        $article = Article::find($id);
+        $date = $article -> content;
+        if (!is_null($big_title)&&$big_title!="") {
+            $new_content = [
+                'type' => 0 ,
+                'text' => $big_title ,
+            ];
+            array_push($date['content'],$new_content);
+            $article -> content = $date;
+            $article->save();
+        }
+        return response()->json($date);
     }
     public function content_add_small(Request $request)
     {
-        return response()->json($request->input("small_title"));
+        $id = $request->input("id");
+        $small_title = $request->input("small_title");
+        $article = Article::find($id);
+        $date = $article->content;
+        if (!is_null($small_title)&&$small_title!="") {
+            $new_content = [
+                'type' => 1,
+                'text' => $small_title,
+            ];
+            array_push($date['content'], $new_content);
+            $article->content = $date;
+            $article->save();
+        }
+        return response()->json($date);
     }
     public function content_add_text(Request $request)
     {
-        return response()->json($request->input("text"));
+        $id = $request->input("id");
+        $text = $request->input("text");
+        $article = Article::find($id);
+        $date = $article -> content;
+        if (!is_null($text)&&$text!="") {
+            $new_content = [
+                'type' => 2 ,
+                'text' => $text ,
+            ];
+            array_push($date['content'],$new_content);
+            $article -> content = $date;
+            $article->save();
+        }
+        return response()->json($date);
     }
     public function content_add_pic(Request $request)
     {
-        return response()->json($request->input("pic_id"));
+        $id = $request->input("id");
+        $pic_id = $request->input("pic_id");
+        $article = Article::find($id);
+        $date = $article -> content;
+        if (!is_null($pic_id)&&$pic_id!="") {
+            $new_content = [
+                'type' => 3 ,
+                'img' => $pic_id ,
+            ];
+            array_push($date['content'],$new_content);
+            $article -> content = $date;
+            $article->save();
+        }
+        return response()->json($date);
     }
 }

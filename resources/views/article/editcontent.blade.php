@@ -38,7 +38,7 @@
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="/article"><i class="fa fa-dashboard"></i>文章</a></li>
-                    <li class="active">创建文章</li>
+                    <li class="active">编辑文章内容</li>
                 </ol>
             </section>
 
@@ -181,9 +181,10 @@
                     <div class="col-md-6">
                         <div class="box box-warning">
                             <div class="box-header">
-                                <h3 class="box-title">预览</h3>
+                                <h3 class="box-title">内容</h3>
                             </div>
-                            <div class="box-body">
+                            <div class="box-body" id="article_content">
+
                             </div>
                         </div>
                     </div>
@@ -205,6 +206,35 @@
         <script type="text/javascript" src="http://static.youngchina.review/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
         <script src="http://cdn.bootcss.com/jquery.form/3.51/jquery.form.js"></script>
         <script type="text/javascript">
+            $.refresh_preview = function(content) {
+                console.log(content);
+                var article_content = $('#article_content');
+                article_content.empty();
+                $("#title_h1").val('');
+                $("#title_h2").val('');
+                $("#text_area").val('');
+                $(".progress").hide();
+                $.each(content, function(i,val){
+                    switch(val['type'])
+                    {
+                        case 0:
+                            article_content.append("<h1>" + val['text'] + "</h1>");
+                            break;
+                        case 1:
+                            article_content.append("<h2>" + val['text'] + "</h2>");
+                            break;
+                        case 2:
+                            article_content.append("<h3>" + val['text'] + "</h3>");
+                            break;
+                        case 3:
+                            article_content.append("<img src='/file?uuid="+val['img']+"&width=640&height=320' style='max-width:100%'>");
+                            break;
+                        default:
+                            break;
+                    }
+                });
+            };
+            $.refresh_preview(<?php echo(json_encode($article->content["content"])); ?>);
             $(function () {
                 var bar = $('.bar');
                 var percent = $('.percent');
@@ -229,13 +259,9 @@
                         success: function(data) {
                             var obj = jQuery.parseJSON(data.data);
                             console.log();
-                            $.post("/article/content/add/pic" ,{pic_id:obj.uuid},function(msg){
+                            $.post("/article/content/add/pic" ,{pic_id:obj.uuid,id:article_id},function(msg){
                                 console.log(msg);
-                                if(msg.status == 200){
-
-                                }else{
-
-                                }
+                                $.refresh_preview(msg["content"]);
                             });
                         },
                         error:function(xhr){
@@ -247,47 +273,31 @@
                     $(document).on('click',"#delete",function(){
                         $.post("/article/content/delete/" + article_id ,function(msg){
                             console.log(msg);
-                            if(msg.status == 200){
-
-                            }else{
-
-                            }
+                            $.refresh_preview(msg["content"]);
                         });
                     });
                 });
                 $(function () {
                     $(document).on('click',"#big_title",function(){
-                        $.post("/article/content/add/big",{big_title:$("#title_h1").val()},function(msg){
+                        $.post("/article/content/add/big",{big_title:$("#title_h1").val(),id:article_id},function(msg){
                             console.log(msg);
-                            if(msg.status == 200){
-
-                            }else{
-
-                            }
+                            $.refresh_preview(msg["content"]);
                         });
                     });
                 });
                 $(function () {
                     $(document).on('click',"#small_title",function(){
-                        $.post("/article/content/add/small",{small_title:$("#title_h2").val()},function(msg){
+                        $.post("/article/content/add/small",{small_title:$("#title_h2").val(),id:article_id},function(msg){
                             console.log(msg);
-                            if(msg.status == 200){
-
-                            }else{
-
-                            }
+                            $.refresh_preview(msg["content"]);
                         });
                     });
                 });
                 $(function () {
                     $(document).on('click',"#text",function(){
-                        $.post("/article/content/add/text",{text:$("#text_area").val()},function(msg){
+                        $.post("/article/content/add/text",{text:$("#text_area").val(),id:article_id},function(msg){
                             console.log(msg);
-                            if(msg.status == 200){
-
-                            }else{
-
-                            }
+                            $.refresh_preview(msg["content"]);
                         });
                     });
                 });

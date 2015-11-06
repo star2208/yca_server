@@ -16,4 +16,7 @@ class Article extends Model
     {
         return $this->morphTo();
     }
+    protected $casts = [
+        'content' => 'array',
+    ];
 }

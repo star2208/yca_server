@@ -16,7 +16,7 @@ class CreateArticles extends Migration
             $table->bigIncrements('id');
             $table->string('title')->index();
             $table->morphs('author');
-            $table->json('content')->nullable();
+            $table->json('content')->default(json_encode(['content' => []]));
             $table->morphs('topic');
             $table->string('cover');
             $table->dateTime('publishTime')->index();
