@@ -46,7 +46,7 @@ class TopicController extends Controller
      */
     public function index()
     {
-        $topics = Topic::all();
+        $topics = Topic::orderBy('id')->get();
         return response()->view('topic.index',['topics' => $topics]);
     }
 
