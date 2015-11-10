@@ -65,7 +65,7 @@ return [
         ],
         'pgsql' => [
             'driver'   => 'pgsql',
-            'host'     => env('DB_HOST', 'ycadbinstance.cama4osnm3hn.ap-northeast-1.rds.amazonaws.com'),
+            'host'     => env('DB_HOST', '172.31.21.128'),
             'database' => env('DB_DATABASE', 'yca'),
             'username' => env('DB_USERNAME', 'lenlv'),
             'password' => env('DB_PASSWORD', '467000320'),
