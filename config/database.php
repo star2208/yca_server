@@ -65,7 +65,7 @@ return [
         ],
         'pgsql' => [
             'driver'   => 'pgsql',
-            'host'     => env('DB_HOST', '52.68.197.33'),
+            'host'     => env('DB_HOST', 'lenlvdbinstance.cama4osnm3hn.ap-northeast-1.rds.amazonaws.com'),
             'database' => env('DB_DATABASE', 'yca'),
             'username' => env('DB_USERNAME', 'lenlv'),
             'password' => env('DB_PASSWORD', '467000320'),
