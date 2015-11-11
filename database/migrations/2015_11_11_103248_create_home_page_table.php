@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArticles extends Migration
+class CreateSpecialtopicsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,9 @@ class CreateArticles extends Migration
      */
     public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::create('home_page', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title')->index();
-            $table->morphs('author');
-            $table->json('content')->default(json_encode(['content' => []]));
-            $table->morphs('topic');
-            $table->string('cover');
-            $table->dateTime('publishTime')->index();
+            $table->morphs('article');
             $table->softDeletes()->index();
             $table->timestamps();
         });
@@ -32,6 +27,6 @@ class CreateArticles extends Migration
      */
     public function down()
     {
-        Schema::drop('articles');
+        Schema::drop('home_page');
     }
 }
