@@ -92,7 +92,7 @@ class AuthController extends Controller
         $password = $request->input('password');
         $remember = $request->input('remember');
         if (Auth::attempt(['email' => $email, 'password' => $password], $remember)) {
-            return response() -> view("home");
+            return redirect()->action('HomeController@index');
         }
         return view("auth.login");
     }

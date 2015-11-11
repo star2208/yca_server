@@ -150,6 +150,23 @@
 
                         <div class="box box-warning">
                             <div class="box-header">
+                                <h3 class="box-title">添加引用</h3>
+                            </div>
+                            <div class="box-body">
+                                <div class="input-group">
+                                    <span class="input-group-addon">链接地址</span>
+                                    <input type="text" id="link_url" placeholder="输入小标题内容" class="form-control">
+                                    <span class="input-group-addon">引用名称</span>
+                                    <input type="text" id="link_text" placeholder="输入引用名称" class="form-control">
+                                    <span class="input-group-btn">
+                                        <button id = "link_btn" type="submit" class="btn btn-warning btn-flat">提交</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box box-warning">
+                            <div class="box-header">
                                 <h3 class="box-title">添加插图</h3>
                             </div>
                             <div class="box-body">
@@ -252,6 +269,9 @@
                         case 3:
                             article_content.append("<img src='/file?uuid="+val['img']+"&width=640&height=320' style='max-width:100%'>");
                             break;
+                        case 4:
+                            article_content.append("<a href='" + val['link_url'] + "' target='_blank'>" + val['link_text'] + "</a><br>");
+                            break;
                         default:
                             break;
                     }
@@ -319,6 +339,14 @@
                 $(function () {
                     $(document).on('click',"#text",function(){
                         $.post("/article/content/add/text",{text:$("#text_area").val(),id:article_id},function(msg){
+                            console.log(msg);
+                            $.refresh_preview(msg["content"]);
+                        });
+                    });
+                });
+                $(function () {
+                    $(document).on('click',"#link_btn",function(){
+                        $.post("/article/content/add/link",{link_url:$("#link_url").val(),link_text:$("#link_text").val(),id:article_id},function(msg){
                             console.log(msg);
                             $.refresh_preview(msg["content"]);
                         });
