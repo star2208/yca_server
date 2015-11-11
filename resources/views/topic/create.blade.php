@@ -56,12 +56,12 @@
                                     @endif
                                     <div class="input-group">
                                         <span class="input-group-addon">题目</span>
-                                        <input name = "name" type="text" class="form-control" placeholder="输入栏目题目">
+                                        <input name = "topic_name" type="text" class="form-control" placeholder="输入栏目题目">
                                     </div>
                                     <br>
                                     <div class="input-group">
                                         <span class="input-group-addon">简介</span>
-                                        <input name = "describe" type="text" class="form-control" placeholder="输入栏目简介，例如：如何赛艇">
+                                        <input name = "topic_describe" type="text" class="form-control" placeholder="输入栏目简介，例如：如何赛艇">
                                     </div>
                                     <br>
                                     <div class="form-group">

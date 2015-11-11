@@ -133,7 +133,7 @@
                         );
                         //显示上传后的图片
                         var img = "/file?uuid="+obj.uuid+"&width=114&height=114";
-                        showimg.html("<img src='"+img+"' style='max-width:100%'>");
+                        showimg.html("<br><img src='"+img+"' style='max-width:100%'>");
                     },
                     error:function(xhr){ //上传失败
                         btn.html("上传失败");

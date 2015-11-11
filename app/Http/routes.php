@@ -37,6 +37,9 @@ Route::post('article/content/add/big', 'ArticleController@content_add_big');
 Route::post('article/content/add/small', 'ArticleController@content_add_small');
 Route::post('article/content/add/text', 'ArticleController@content_add_text');
 Route::post('article/content/add/pic', 'ArticleController@content_add_pic');
+Route::post('article/content/add/link', 'ArticleController@content_add_link');
+Route::post('article/accept', 'ArticleController@accept');
+Route::post('article/cancel_accept', 'ArticleController@cancel_accept');
 //文件
 Route::post('/file', 'StorageController@postFile');
 Route::get('/file', 'StorageController@getFile');

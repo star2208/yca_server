@@ -17,8 +17,8 @@ class TopicController extends Controller
     {
         $this->middleware('auth');
         $rules = array(
-            'name' => 'required',
-            'describe' => 'required',
+            'topic_name' => 'required',
+            'topic_describe' => 'required',
             'color' => 'required',
         );
         $message = array(
@@ -27,8 +27,8 @@ class TopicController extends Controller
         );
 
         $attributes = array(
-            "name" => '栏目名称',
-            'describe' => '栏目简介',
+            "topic_name" => '栏目名称',
+            'topic_describe' => '栏目简介',
             'color' => '栏目背景颜色',
         );
 
@@ -61,9 +61,9 @@ class TopicController extends Controller
             return redirect()->back()->withErrors($this->validator->errors());
         }
         $topic = new Topic();
-        $topic -> name = $request->input("name");
+        $topic -> name = $request->input("topic_name");
         $topic -> color = base_convert (substr($request->input("color"),-6), 16,10 ) ;
-        $topic -> describe = $request->input("describe");
+        $topic -> describe = $request->input("topic_describe");
         $topic -> save();
         return redirect()->action('TopicController@index');
     }
@@ -117,9 +117,9 @@ class TopicController extends Controller
             return redirect()->back()->withErrors($this->validator->errors());
         }
         $topic = Topic::find($request->input("id"));
-        $topic -> name = $request->input("name");
+        $topic -> name = $request->input("topic_name");
         $topic -> color = base_convert (substr($request->input("color"),-6), 16,10 ) ;
-        $topic -> describe = $request->input("describe");
+        $topic -> describe = $request->input("topic_describe");
         $topic -> save();
         return  redirect()->action('TopicController@index');
     }

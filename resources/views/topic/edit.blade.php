@@ -56,18 +56,18 @@
                                     @endif
                                     <div class="input-group">
                                         <span class="input-group-addon">题目</span>
-                                        <input name = "name" type="text" class="form-control" placeholder="输入栏目题目" value="<?php echo($topic->name);?>">
+                                        <input name = "topic_name" type="text" class="form-control" placeholder="输入栏目题目" value="<?php echo($topic->name);?>">
                                     </div>
                                     <br>
                                     <div class="input-group">
                                         <span class="input-group-addon">简介</span>
-                                        <input name = "describe" type="text" class="form-control" placeholder="输入栏目简介，例如：如何赛艇" value="<?php echo($topic->describe);?>">
+                                        <input name = "topic_describe" type="text" class="form-control" placeholder="输入栏目简介，例如：如何赛艇" value="<?php echo($topic->describe);?>">
                                     </div>
                                     <br>
                                     <div class="form-group">
                                         <div class="input-group my-colorpicker colorpicker-element">
                                             <span class="input-group-addon">背景颜色</span>
-                                            <input name="color" type="text" class="form-control" value="<?php echo($topic->color);?>">
+                                            <input name="color" type="text" class="form-control" readonly  value="<?php echo($topic->color);?>">
                                             <div class="input-group-addon">
                                                 <i style="background-color: rgb(0, 0, 0);"></i>
                                             </div>

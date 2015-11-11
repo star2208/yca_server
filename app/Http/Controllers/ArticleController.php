@@ -13,6 +13,7 @@ use App\Topic;
 use App\Author;
 use App\Article;
 use Carbon\Carbon;
+use Auth;
 
 class ArticleController extends Controller
 {
@@ -26,6 +27,7 @@ class ArticleController extends Controller
             'publishTime' => 'required',
             'cover' => 'required',
             'topic' => 'required',
+            'describe' => 'required',
         );
         $message = array(
             "required" => ":attribute 不能为空",
@@ -37,6 +39,7 @@ class ArticleController extends Controller
             'publishTime' => '发布时间',
             'cover' => '封面',
             'topic' => '栏目',
+            'describe' => '简介',
         );
 
         $this->validator = Validator::make(
@@ -63,6 +66,8 @@ class ArticleController extends Controller
         $article = new Article();
         $article -> title = $request->input("title");
         $article -> cover = $request->input("cover");
+        $article -> describe = $request->input("describe");
+        $article -> style = $request->input("style");
         $article -> author() -> associate($author);
         $article -> topic() -> associate($topic);
         $article -> publishTime = Carbon::createFromFormat('Y-m-d H:i', trim($request->input("publishTime")));
@@ -96,7 +101,8 @@ class ArticleController extends Controller
     public function edit_content($id)
     {
         $article = Article::find($id);
-        return response()->view('article.editcontent',['article' => $article]);
+        $user = Auth::user();
+        return response()->view('article.editcontent',['article' => $article,'user'=>$user]);
     }
 
     public function update(Request $request)
@@ -109,6 +115,8 @@ class ArticleController extends Controller
         $article = Article::find($request->input("id"));
         $article -> title = $request->input("title");
         $article -> cover = $request->input("cover");
+        $article -> describe = $request->input("describe");
+        $article -> style = $request->input("style");
         $article -> author() -> associate($author);
         $article -> topic() -> associate($topic);
         $article -> publishTime = Carbon::createFromFormat('Y-m-d H:i', trim($request->input("publishTime")));
@@ -198,6 +206,45 @@ class ArticleController extends Controller
             $article -> content = $date;
             $article->save();
         }
+        return response()->json($date);
+    }
+    public function content_add_link(Request $request)
+    {
+        $id = $request->input("id");
+        $link_url = $request->input("link_url");
+        $link_text = $request->input("link_text");
+        $article = Article::find($id);
+        $date = $article -> content;
+        if (!is_null($link_url)&&$link_url!=""&&!is_null($link_text)&&$link_text!="") {
+            $new_content = [
+                'type' => 4 ,
+                'link_url' => $link_url ,
+                'link_text' => $link_text ,
+            ];
+            array_push($date['content'],$new_content);
+            $article -> content = $date;
+            $article->save();
+        }
+        return response()->json($date);
+    }
+
+    public function accept(Request $request)
+    {
+        $id = $request->input("id");
+        $article = Article::find($id);
+        $date = $article -> content;
+        $article -> accepted = true;
+        $article->save();
+        return response()->json($date);
+    }
+
+    public function cancel_accept(Request $request)
+    {
+        $id = $request->input("id");
+        $article = Article::find($id);
+        $date = $article -> content;
+        $article -> accepted = false;
+        $article->save();
         return response()->json($date);
     }
 }

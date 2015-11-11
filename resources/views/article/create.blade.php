@@ -69,6 +69,11 @@
                                     </div>
                                     <br>
                                     <div class="input-group">
+                                        <span class="input-group-addon">简介</span>
+                                        <input name = "describe" type="text" class="form-control" placeholder="输入简介内容">
+                                    </div>
+                                    <br>
+                                    <div class="input-group">
                                         <span class="input-group-addon">栏目</span>
                                         <select class="form-control" name="topic" >
                                             <option value = ""></option>
@@ -85,6 +90,15 @@
                                             <?php foreach ($authors as $author){?>
                                             <option value = "<?php echo($author->id );?>"><?php echo($author->name );?></option>
                                             <?php }?>
+                                        </select>
+                                    </div>
+                                    <br>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">展示类型</span>
+                                        <select class="form-control" name="style" >
+                                            <option value = "1">大图</option>
+                                            <option value = "2">小图</option>
+                                            <option value = "3">图组</option>
                                         </select>
                                     </div>
                                     <br>
@@ -213,7 +227,7 @@
                         );
                         //显示上传后的图片
                         var img = "/file?uuid="+obj.uuid+"&width=640&height=320";
-                        showimg.html("<img src='"+img+"' style='max-width:100%'>");
+                        showimg.html("<br><img src='"+img+"' style='max-width:100%'>");
                         pic_uuid.val(obj.uuid);
                     },
                     error:function(xhr){ //上传失败

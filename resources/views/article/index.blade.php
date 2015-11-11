@@ -68,13 +68,24 @@
                                         <td><?php echo($article->author->name );?></td>
                                         <td><?php echo($article->publishTime );?></td>
                                         <td><?php
-                                                if ($article->publishTime < $nowtime)
-                                                {
-                                                    echo("<span class='label label-success'>已发布</span>");
+                                                if($article->content['content'] == []){
+                                                    echo("<span class='label label-danger'>尚未填写文章内容，无法发布</span>");
                                                 }
-                                                else
-                                                {
-                                                    echo("<span class='label label-warning'>等待发布</span>");
+                                                else{
+                                                    if($article->accepted == false) {
+                                                        echo("<span class='label label-danger'>待审核</span>");
+                                                    }
+                                                    else
+                                                    {
+                                                        if ($article->publishTime < $nowtime)
+                                                        {
+                                                            echo("<span class='label label-success'>已发布</span>");
+                                                        }
+                                                        else
+                                                        {
+                                                            echo("<span class='label label-warning'>等待发布</span>");
+                                                        }
+                                                    }
                                                 }
                                             ?>
                                         </td>

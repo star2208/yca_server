@@ -69,6 +69,11 @@
                                     </div>
                                     <br>
                                     <div class="input-group">
+                                        <span class="input-group-addon">简介</span>
+                                        <input name = "describe" type="text" class="form-control" placeholder="输入简介内容" value="<?php echo($article->describe);?>">
+                                    </div>
+                                    <br>
+                                    <div class="input-group">
                                         <span class="input-group-addon">栏目</span>
                                         <select class="form-control" name="topic" >
                                             <option value = "<?php echo($article->topic->id);?>"><?php echo($article->topic->name);?></option>
@@ -87,6 +92,16 @@
                                                 if($article->topic->name !=$topic){ ?>
                                                 <option value = "<?php echo($author->id );?>"><?php echo($author->name );?></option>
                                             <?php }}?>
+                                        </select>
+                                    </div>
+                                    <br>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">展示类型</span>
+                                        <select class="form-control" name="style" >
+                                            <option value = "<?php echo($article->style);?>"><?php $dic=['大图','小图','图组'];echo($dic[$article->style]);?></option>
+                                            <?php if($article->style != 1) echo("<option value = '1'>大图</option>");?>
+                                            <?php if($article->style != 2) echo("<option value = '2'>小图</option>");?>
+                                            <?php if($article->style != 3) echo("<option value = '3'>图组</option>");?>
                                         </select>
                                     </div>
                                     <br>
@@ -221,7 +236,7 @@
                         );
                         //显示上传后的图片
                         var img = "/file?uuid="+obj.uuid+"&width=640&height=320";
-                        showimg.html("<img src='"+img+"' style='max-width:100%'>");
+                        showimg.html("<br><img src='"+img+"' style='max-width:100%'>");
                         pic_uuid.val(obj.uuid);
                     },
                     error:function(xhr){ //上传失败

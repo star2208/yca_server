@@ -174,6 +174,29 @@
                                 <button id="text" type="submit" class="btn btn-warning small.margin">提交</button>
                             </div>
                         </div>
+                        <?php if(array_key_exists('admin',$user->level)) { echo("
+                        <div class='box box-danger'>
+                            <div class='box-header'>
+                                <h3 class='box-title'>审核（管理员可见）</h3>
+                            </div>
+                            <div id='accept_div' class='box-body'>
+                                ");
+                                if($article->accepted)
+                                {
+                                    echo("<h3>审核通过</h3>");
+                                }
+                                else
+                                {
+                                    echo("<h3>尚未审核</h3>");
+                                }
+                         echo("
+                            </div>
+                            <div class='box-footer'>
+                                <button id='accept' type='submit' class='btn btn-success small.margin'>通过审核</button>
+                                <button id='cancel_accept' type='submit' class='btn btn-danger small.margin'>取消审核（会撤下已经发布的文章）</button>
+                            </div>
+                        </div>
+                        ");} ?>
                     </div><!--/.col (left) -->
                     <!-- right column -->
 
@@ -298,6 +321,22 @@
                         $.post("/article/content/add/text",{text:$("#text_area").val(),id:article_id},function(msg){
                             console.log(msg);
                             $.refresh_preview(msg["content"]);
+                        });
+                    });
+                });
+                $(function () {
+                    $(document).on('click',"#accept",function(){
+                        $.post("/article/accept",{id:article_id},function(msg){
+                            console.log(msg);
+                            $("#accept_div").html('<h3>审核通过</h3>');
+                        });
+                    });
+                });
+                $(function () {
+                    $(document).on('click',"#cancel_accept",function(){
+                        $.post("/article/cancel_accept",{id:article_id},function(msg){
+                            console.log(msg);
+                            $("#accept_div").html('<h3>尚未审核</h3>');
                         });
                     });
                 });

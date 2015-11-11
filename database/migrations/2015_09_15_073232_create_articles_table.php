@@ -20,7 +20,9 @@ class CreateArticlesTable extends Migration
             $table->morphs('topic');
             $table->string('cover');
             $table->integer('style')->index();
+            $table->string('describe')->index();
             $table->dateTime('publishTime')->index();
+            $table->boolean('accepted')->index()->default(false);
             $table->softDeletes()->index();
             $table->timestamps();
         });
