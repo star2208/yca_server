@@ -87,7 +87,7 @@
                     <div class="small-box bg-yellow">
                         <div class="inner">
                             <h3><?php echo($homepage_count) ?></h3>
-                            <p>今日首页新增文章</p>
+                            <p>今日首页发布文章</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -99,7 +99,7 @@
                     <div class="small-box bg-green">
                         <div class="inner">
                             <h3><?php echo($today_article_count) ?></h3>
-                            <p>今日新文章</p>
+                            <p>今日发布文章</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>

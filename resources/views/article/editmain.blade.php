@@ -47,6 +47,31 @@
                 <div class="row">
                     <!-- left column -->
                     <div class="col-md-12">
+
+                        <!-- general form elements -->
+                        <div class="box box-primary">
+                            <div class="box-header">
+                                <h3 class="box-title">封面</h3>
+                            </div><!-- /.box-header -->
+                            <!-- form start -->
+                            <!--
+                            <form role="form"  method="POST" action="/file" enctype="multipart/form-data">
+                            -->
+                                <div class="box-body">
+                                    <div class="form-group">
+                                            <input id="fileupload" type="file" name="file">
+                                        <p class="help-block">封面图片，640*320像素，且经过压缩处理。由于图片服务器可能被随时干掉，编辑请保留所有图片存档以便恢复。</p>
+                                    </div>
+
+                                    <div class="progress" style="display: none;">
+                                        <span class="bar"></span><span class="percent">0%</span >
+                                    </div>
+                                    <div class="files"></div>
+                                </div><!-- /.box-body -->
+                                <div class="box-footer">
+                                    <div id="showimg"></div>
+                                </div>
+                        </div><!-- /.box -->
                         <div class="box box-success">
                             <div class="box-header">
                                 <h3 class="box-title">基础信息</h3>
@@ -78,8 +103,8 @@
                                         <select class="form-control" name="topic" >
                                             <option value = "<?php echo($article->topic->id);?>"><?php echo($article->topic->name);?></option>
                                             <?php foreach ($topics as $topic){
-                                                if($article->topic->name !=$topic){ ?>
-                                                <option value = "<?php echo($topic->id );?>"><?php echo($topic->name );?></option>
+                                            if($article->topic->name !=$topic){ ?>
+                                            <option value = "<?php echo($topic->id );?>"><?php echo($topic->name );?></option>
                                             <?php }}?>
                                         </select>
                                     </div>
@@ -89,8 +114,8 @@
                                         <select class="form-control" name="author" >
                                             <option value = "<?php echo($article->author->id);?>"><?php echo($article->author->name);?></option>
                                             <?php foreach ($authors as $author){
-                                                if($article->topic->name !=$topic){ ?>
-                                                <option value = "<?php echo($author->id );?>"><?php echo($author->name );?></option>
+                                            if($article->topic->name !=$topic){ ?>
+                                            <option value = "<?php echo($author->id );?>"><?php echo($author->name );?></option>
                                             <?php }}?>
                                         </select>
                                     </div>
@@ -119,30 +144,6 @@
                                 <input  name = "id" value="<?php echo($article->id);?>" type='hidden'/>
                             </form>
                         </div>
-                        <!-- general form elements -->
-                        <div class="box box-primary">
-                            <div class="box-header">
-                                <h3 class="box-title">封面</h3>
-                            </div><!-- /.box-header -->
-                            <!-- form start -->
-                            <!--
-                            <form role="form"  method="POST" action="/file" enctype="multipart/form-data">
-                            -->
-                                <div class="box-body">
-                                    <div class="form-group">
-                                            <input id="fileupload" type="file" name="file">
-                                        <p class="help-block">封面图片，640*320像素，且经过压缩处理。由于图片服务器可能被随时干掉，编辑请保留所有图片存档以便恢复。</p>
-                                    </div>
-
-                                    <div class="progress" style="display: none;">
-                                        <span class="bar"></span><span class="percent">0%</span >
-                                    </div>
-                                    <div class="files"></div>
-                                </div><!-- /.box-body -->
-                                <div class="box-footer">
-                                    <div id="showimg"></div>
-                                </div>
-                        </div><!-- /.box -->
                         <!--
                         <div class="box box-danger">
                             <div class="box-header">

@@ -59,6 +59,7 @@
                                         <th>发布日期</th>
                                         <th>状态</th>
                                         <th>操作</th>
+                                        <th>特殊操作</th>
                                     </tr>
                                     <?php foreach ($articles as $article){?>
                                     <tr>
@@ -92,58 +93,18 @@
                                         <td>
                                             <a type="button" class="label label-primary" href="/article/edit/main/<?php echo($article->id );?>">编辑基础信息</a>
                                             <a type="button" class="label label-primary" href="/article/edit/content/<?php echo($article->id );?>">编辑内容</a>
-                                            <a type="button" class="label label-primary" href="/article/delete/<?php echo($article->id );?>">删除</a>
+                                            <a type="button" class="label label-primary" href="/article/add/homepage<?php echo($article->id );?>">加入首页</a>
+                                            <a type="button" class="label label-primary" href="/article/remove/homepafe<?php echo($article->id );?>">移出首页</a>
+                                        </td>
+                                        <td>
+                                            <a type="button" class="label label-danger" href="/article/delete/<?php echo($article->id );?>">删除</a>
                                         </td>
                                     </tr>
                                     <?php }?>
-                                    <!--
-                                    <tr>
-                                        <td>183</td>
-                                        <td>简评</td>
-                                        <td>共产党宣言</td>
-                                        <td>John Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-success">已发布</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>219</td>
-                                        <td>共产党宣言</td>
-                                        <td>语录</td>
-                                        <td>Alexander Pierce</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-warning">等待发布</span></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>657</td>
-                                        <td>共产党宣言</td>
-                                        <td>Bob Doe</td>
-                                        <td>史海沉钩</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-primary">待审核</span></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>175</td>
-                                        <td>共产党宣言</td>
-                                        <td>国际观察</td>
-                                        <td>Mike Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="label label-danger">未添加内容</span></td>
-
-                                    </tr>-->
                                 </table>
                                 <div class="box-footer">
                                     <button class="btn btn-default" onclick="window.location.href='/article/create'"><i class="fa fa-plus"></i>添加文章</button>
                                     {!! $articles->render() !!}
-                                    <!--
-                                    <ul class="pagination pagination-sm no-margin pull-right">
-                                        <li><a href="#">«</a></li>
-                                        <li><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">»</a></li>
-                                    </ul>-->
                                 </div>
                             </div><!-- /.box-body -->
                         </div><!-- /.box -->

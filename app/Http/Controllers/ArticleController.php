@@ -153,6 +153,7 @@ class ArticleController extends Controller
             ];
             array_push($date['content'],$new_content);
             $article -> content = $date;
+            $article -> accepted = false;
             $article->save();
         }
         return response()->json($date);
@@ -170,6 +171,7 @@ class ArticleController extends Controller
             ];
             array_push($date['content'], $new_content);
             $article->content = $date;
+            $article -> accepted = false;
             $article->save();
         }
         return response()->json($date);
@@ -187,6 +189,7 @@ class ArticleController extends Controller
             ];
             array_push($date['content'],$new_content);
             $article -> content = $date;
+            $article -> accepted = false;
             $article->save();
         }
         return response()->json($date);
@@ -204,6 +207,7 @@ class ArticleController extends Controller
             ];
             array_push($date['content'],$new_content);
             $article -> content = $date;
+            $article -> accepted = false;
             $article->save();
         }
         return response()->json($date);
@@ -223,6 +227,7 @@ class ArticleController extends Controller
             ];
             array_push($date['content'],$new_content);
             $article -> content = $date;
+            $article -> accepted = false;
             $article->save();
         }
         return response()->json($date);
