@@ -68,15 +68,13 @@ class AuthController extends Controller
     {
         $SuperAdmin = User::where('email', '=', '3063440744@qq.com');
         if ($SuperAdmin->count() == 0) {
-                $arr = array('super_admin' => 0, 'admin' => 0, 'manager' => 0);
-                //create($arr);
                 $user = new User;
-                $user->realName = '少年中国评论超级管理员';  //iconv("gb2312","utf-8//IGNORE",'�����й����۳�������Ա') ;
-                $user->nickName = '邵中平' ;//iconv("gb2312","utf-8//IGNORE",'����ƽ') ;
+                $user->realName = 'YCAsuperadmin';
+                $user->nickName = 'YCA' ;
                 $user->email = '3063440744@qq.com';
                 $user->password = bcrypt('yca1988szp51');
                 $user->headImage = '/upload/icon.png';
-                $user->level = json_encode($arr);
+                $user->level = ['super_admin' => 0, 'admin' => 0, 'manager' => 0];
                 $user->save();
         }
         return view("auth.login");

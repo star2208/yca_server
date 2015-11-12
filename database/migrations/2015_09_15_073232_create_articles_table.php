@@ -23,6 +23,7 @@ class CreateArticlesTable extends Migration
             $table->string('describe')->index();
             $table->dateTime('publishTime')->index();
             $table->boolean('accepted')->index()->default(false);
+            $table->boolean('is_homepage')->index()->default(false);
             $table->softDeletes()->index();
             $table->timestamps();
         });

@@ -93,8 +93,11 @@
                                         <td>
                                             <a type="button" class="label label-primary" href="/article/edit/main/<?php echo($article->id );?>">编辑基础信息</a>
                                             <a type="button" class="label label-primary" href="/article/edit/content/<?php echo($article->id );?>">编辑内容</a>
-                                            <a type="button" class="label label-primary" href="/article/add/homepage<?php echo($article->id );?>">加入首页</a>
-                                            <a type="button" class="label label-primary" href="/article/remove/homepafe<?php echo($article->id );?>">移出首页</a>
+                                            <?php if (!$article -> is_homepage){?>
+                                            <a type="button" class="label label-success" href="/article/add/homepage/<?php echo($article->id );?>">加入首页</a>
+                                            <?php }else{ ?>
+                                            <a type="button" class="label label-warning" href="/article/remove/homepage/<?php echo($article->id );?>">移出首页</a>
+                                            <?php }?>
                                         </td>
                                         <td>
                                             <a type="button" class="label label-danger" href="/article/delete/<?php echo($article->id );?>">删除</a>

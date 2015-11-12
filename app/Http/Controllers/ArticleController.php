@@ -14,6 +14,7 @@ use App\Author;
 use App\Article;
 use Carbon\Carbon;
 use Auth;
+use App\HomePage;
 
 class ArticleController extends Controller
 {
@@ -122,6 +123,23 @@ class ArticleController extends Controller
         $article -> publishTime = Carbon::createFromFormat('Y-m-d H:i', trim($request->input("publishTime")));
         $article->save();
         return redirect()->action('ArticleController@index');
+    }
+
+    public function add_homepage($id)
+    {
+        $article = Article::find($id);
+//        $homepage = new HomePage();
+//        $homepage ->article() -> associate($article);
+        $article->is_homepage = true;
+        $article->save();
+        return  redirect()->action('ArticleController@index');
+    }
+    public function remove_homepage($id)
+    {
+        $article = Article::find($id);
+        $article->is_homepage = false;
+        $article->save();
+        return  redirect()->action('ArticleController@index');
     }
 
     public function destroy($id)
