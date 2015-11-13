@@ -42,6 +42,8 @@ Route::post('article/content/add/pic', 'ArticleController@content_add_pic');
 Route::post('article/content/add/link', 'ArticleController@content_add_link');
 Route::post('article/accept', 'ArticleController@accept');
 Route::post('article/cancel_accept', 'ArticleController@cancel_accept');
+//推送
+Route::get('notification', 'NotificationController@index');
 //文件
 Route::post('/file', 'StorageController@postFile');
 Route::get('/file', 'StorageController@getFile');
