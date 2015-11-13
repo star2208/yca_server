@@ -32,7 +32,7 @@ class StorageController extends Controller
     public function __construct(Request $request, Guard $auth)
     {
         parent::__construct($request, $auth);
-        $this->middleware('auth');
+        //$this->middleware('auth');
         $this->middleware('json');
         $this->storage_path = base_path('storage/files') . DIRECTORY_SEPARATOR;
     }
