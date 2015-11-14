@@ -34,6 +34,8 @@ Route::get('article/edit/content/{id}', 'ArticleController@edit_content');
 Route::get('article/delete/{id}', 'ArticleController@destroy');
 Route::get('article/add/homepage/{id}', 'ArticleController@add_homepage');
 Route::get('article/remove/homepage/{id}', 'ArticleController@remove_homepage');
+Route::get('article/add/headlines/{id}', 'ArticleController@add_headlines');
+Route::get('article/remove/headlines/{id}', 'ArticleController@remove_headlines');
 Route::post('article/content/delete/{id}', 'ArticleController@delete');
 Route::post('article/content/add/big', 'ArticleController@content_add_big');
 Route::post('article/content/add/small', 'ArticleController@content_add_small');

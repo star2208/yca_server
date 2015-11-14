@@ -53,7 +53,7 @@ class ArticleController extends Controller
 
     public function index()
     {
-        $articles = Article::paginate(20);
+        $articles = Article::orderBy('publishTime','desc')->paginate(20);
         return response()->view('article.index',['articles' => $articles,'nowtime' => Carbon::now()]);
     }
 
@@ -128,8 +128,6 @@ class ArticleController extends Controller
     public function add_homepage($id)
     {
         $article = Article::find($id);
-//        $homepage = new HomePage();
-//        $homepage ->article() -> associate($article);
         $article->is_homepage = true;
         $article->save();
         return  redirect()->action('ArticleController@index');
@@ -138,6 +136,20 @@ class ArticleController extends Controller
     {
         $article = Article::find($id);
         $article->is_homepage = false;
+        $article->save();
+        return  redirect()->action('ArticleController@index');
+    }
+    public function add_headlines($id)
+    {
+        $article = Article::find($id);
+        $article->is_headlines = true;
+        $article->save();
+        return  redirect()->action('ArticleController@index');
+    }
+    public function remove_headlines($id)
+    {
+        $article = Article::find($id);
+        $article->is_headlines = false;
         $article->save();
         return  redirect()->action('ArticleController@index');
     }

@@ -24,6 +24,7 @@ class CreateArticlesTable extends Migration
             $table->dateTime('publishTime')->index();
             $table->boolean('accepted')->index()->default(false);
             $table->boolean('is_homepage')->index()->default(false);
+            $table->boolean('is_headlines')->index()->default(false);
             $table->softDeletes()->index();
             $table->timestamps();
         });

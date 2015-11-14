@@ -98,6 +98,11 @@
                                             <?php }else{ ?>
                                             <a type="button" class="label label-warning" href="/article/remove/homepage/<?php echo($article->id );?>">移出首页</a>
                                             <?php }?>
+                                            <?php if (!$article -> is_headlines){?>
+                                            <a type="button" class="label label-success" href="/article/add/headlines/<?php echo($article->id );?>">加入头条</a>
+                                            <?php }else{ ?>
+                                            <a type="button" class="label label-warning" href="/article/remove/headlines/<?php echo($article->id );?>">移出头条</a>
+                                            <?php }?>
                                         </td>
                                         <td>
                                             <a type="button" class="label label-danger" href="/article/delete/<?php echo($article->id );?>">删除</a>
