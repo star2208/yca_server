@@ -52,7 +52,7 @@
                                 <table class="table table-hover">
 
                                     <tr>
-                                        <th>ID</th>
+                                        <th>优先级</th>
                                         <th>名称</th>
                                         <th>描述</th>
                                         <th>操作</th>
@@ -60,11 +60,18 @@
                                     </tr>
                                     <?php foreach ($topics as $topic){?>
                                     <tr>
-                                        <td><?php echo($topic->id );?></td>
+                                        <td><?php echo($topic->sort );?></td>
                                         <td><?php echo($topic->name );?></td>
                                         <td><?php echo($topic->describe );?></td>
                                         <td>
                                             <a type="button" class="label label-primary" href="/topic/edit/<?php echo($topic->id );?>">编辑</a>
+
+                                            <?php if ($topic -> is_enable){?>
+                                            <a type="button" class="label label-danger" href="/topic/disable/<?php echo($topic->id );?>">禁用</a>
+                                            <?php }else{ ?>
+                                            <a type="button" class="label label-success" href="/topic/remove/enable/<?php echo($topic->id );?>">恢复</a>
+                                            <?php }?>
+
                                         </td>
                                         <td><?php echo($topic->updated_at );?></td>
                                     </tr>

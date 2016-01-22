@@ -20,6 +20,7 @@ class TopicController extends Controller
             'topic_name' => 'required',
             'topic_describe' => 'required',
             'color' => 'required',
+            'topic_sort' => 'required|integer',
         );
         $message = array(
             "required"             => ":attribute 不能为空",
@@ -30,6 +31,7 @@ class TopicController extends Controller
             "topic_name" => '栏目名称',
             'topic_describe' => '栏目简介',
             'color' => '栏目背景颜色',
+            'topic_sort' => '栏目优先级',
         );
 
         $this->validator = Validator::make(
@@ -46,7 +48,7 @@ class TopicController extends Controller
      */
     public function index()
     {
-        $topics = Topic::orderBy('id')->get();
+        $topics = Topic::orderBy('sort', 'desc')->get();
         return response()->view('topic.index',['topics' => $topics]);
     }
 
@@ -64,6 +66,7 @@ class TopicController extends Controller
         $topic -> name = $request->input("topic_name");
         $topic -> color = base_convert (substr($request->input("color"),-6), 16,10 ) ;
         $topic -> describe = $request->input("topic_describe");
+        $topic -> sort = $request->input("topic_sort");
         $topic -> save();
         return redirect()->action('TopicController@index');
     }

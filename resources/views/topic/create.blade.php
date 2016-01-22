@@ -64,6 +64,11 @@
                                         <input name = "topic_describe" type="text" class="form-control" placeholder="输入栏目简介，例如：如何赛艇">
                                     </div>
                                     <br>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">优先级</span>
+                                        <input name = "topic_sort" type="number" class="form-control" placeholder="输入栏目优先级，例如：1">
+                                    </div>
+                                    <br>
                                     <div class="form-group">
                                         <div class="input-group my-colorpicker colorpicker-element">
                                             <span class="input-group-addon">背景颜色</span>
