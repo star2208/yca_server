@@ -22,8 +22,9 @@ Route::get('topic/create', 'TopicController@show');
 Route::post('topic/create', 'TopicController@create');
 Route::get('topic/edit/{id}', 'TopicController@edit');
 Route::post('topic/update', 'TopicController@update');
+Route::get('topic/disable/{id}', 'TopicController@disable');
+Route::get('topic/enable/{id}', 'TopicController@enable');
 Route::get('topic/delete/{id}', 'TopicController@delete');
-Route::post('topic/restore/{id}', 'TopicController@restore');
 //文章
 Route::get('article', 'ArticleController@index');
 Route::get('article/create', 'ArticleController@show');

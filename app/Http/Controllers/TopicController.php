@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use App\Topic;
+use App\Article;
 
 class TopicController extends Controller
 {
@@ -49,7 +50,7 @@ class TopicController extends Controller
     public function index()
     {
         $topics = Topic::orderBy('sort', 'desc')->get();
-        return response()->view('topic.index',['topics' => $topics]);
+        return response()->view('topic.index',['topics' => $topics,'error_code' => 0]);
     }
 
     /**
@@ -126,7 +127,21 @@ class TopicController extends Controller
         $topic -> save();
         return  redirect()->action('TopicController@index');
     }
+    public function disable($id)
+    {
+        $topic = Topic::find($id);
+        $topic->is_enable = false;
+        $topic -> save();
+        return  redirect()->action('TopicController@index');
+    }
 
+    public function enable($id)
+    {
+        $topic = Topic::find($id);
+        $topic->is_enable = true;
+        $topic -> save();
+        return  redirect()->action('TopicController@index');
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -135,8 +150,20 @@ class TopicController extends Controller
      */
     public function delete($id)
     {
-        $topic = Topic::find($id);
-        $topic->delete();
-        return  redirect()->action('TopicController@index');
+        $articles_count = Article::where('topic_id','=',$id)->count();
+        if($articles_count == 0)
+        {
+            $topic = Topic::find($id);
+            $topic->delete();
+            $topics = Topic::orderBy('sort', 'desc')->get();
+            return response()->view('topic.index',['topics' => $topics,'error_code' => 1]);
+        }
+        else
+        {
+            $topics = Topic::orderBy('sort', 'desc')->get();
+            return response()->view('topic.index',['topics' => $topics,'error_code' => 2]);
+        }
     }
+
+
 }

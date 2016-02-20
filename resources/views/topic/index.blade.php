@@ -35,6 +35,18 @@
             <section class="content">
                 <div class="row">
                     <div class="col-xs-12">
+                        <?php if ($error_code == 2){?>
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            删除失败，必须先删除或转移该栏目下的所属文章才能删除栏目
+                        </div>
+                        <?php }
+                            else if ($error_code == 1){?>
+                            <div class="alert alert-success alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                删除成功
+                            </div>
+                        <?php }?>
                         <div class="box">
                             <div class="box-header">
                                 <h3 class="box-title">作者列表</h3>
@@ -69,9 +81,9 @@
                                             <?php if ($topic -> is_enable){?>
                                             <a type="button" class="label label-danger" href="/topic/disable/<?php echo($topic->id );?>">禁用</a>
                                             <?php }else{ ?>
-                                            <a type="button" class="label label-success" href="/topic/remove/enable/<?php echo($topic->id );?>">恢复</a>
+                                            <a type="button" class="label label-success" href="/topic/enable/<?php echo($topic->id );?>">恢复</a>
                                             <?php }?>
-
+                                            <a type="button" class="label label-danger" href="/topic/delete/<?php echo($topic->id );?>">删除</a>
                                         </td>
                                         <td><?php echo($topic->updated_at );?></td>
                                     </tr>
