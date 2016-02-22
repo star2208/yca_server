@@ -254,6 +254,8 @@
                 $("#title_h2").val('');
                 $("#text_area").val('');
                 $(".progress").hide();
+                $("#link_url").val('');
+                $("#link_text").val('');
                 $.each(content, function(i,val){
                     switch(val['type'])
                     {

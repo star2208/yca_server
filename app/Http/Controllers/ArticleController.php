@@ -94,7 +94,7 @@ class ArticleController extends Controller
     public function edit_main($id)
     {
         $article = Article::find($id);
-        $topics = Topic::all();
+        $topics = Topic::where('is_enable','=',true)->get();
         $authors = Author::all();
         return response()->view('article.editmain',['article' => $article,'topics' => $topics,'authors' => $authors]);
     }
